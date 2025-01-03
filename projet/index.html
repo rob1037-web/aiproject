@@ -9,7 +9,7 @@
     <script src="assets/css/js/validation.js" defer></script>
     <script src="assets/css/js/pdf-generator.js" defer></script>
     <script src="assets/css/js/uploader.js" defer></script>
-    <script src="assets/css/js/sections-dynamiques.js"defer></script>
+    <script src="assets/css/js/sections-dynamiques.js" defer></script>
     <script src="assets/css/js/services.js" defer></script>
  
 
@@ -65,7 +65,7 @@
                 </div>
                 <div class="form-group">
                     <label for="entrepriseAdresse">Adresse *</label>
-                    <textarea id="entrepriseAdresse" name="entrepriseAdresse" rows="3" required></textarea></textarea>
+                    <textarea id="entrepriseAdresse" name="entrepriseAdresse" rows="3" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="entrepriseContact">Contact référent</label>
@@ -74,25 +74,27 @@
                 <div>
                     <h3>Paiements et Règlements</h3>
                     <div>
-                        <label>Mode de paiement</label>
-                        <select>
-                            <option>Virement bancaire</option>
-                            <option>Chèque</option>
-                            <option>Carte bancaire</option>
+                        <label for="modePaiement">Mode de paiement</label>
+                        <select id="modePaiement" name="modePaiement">
+                            <option value="">Sélectionnez un mode de paiement</option>
+                            <option value="virement">Virement bancaire</option>
+                            <option value="cheque">Chèque</option>
+                            <option value="carte">Carte bancaire</option>
                         </select>
                     </div>
                     <div>
-                        <label>Délai de paiement</label>
-                        <select>
-                            <option>À réception</option>
-                            <option>30 jours</option>
-                            <option>45 jours</option>
-                            <option>60 jours</option>
+                        <label for="delaiPaiement">Délai de paiement</label>
+                        <select id="delaiPaiement" name="delaiPaiement">
+                            <option value="">Sélectionnez un délai de paiement</option>
+                            <option value="reception">À réception</option>
+                            <option value="30jours">30 jours</option>
+                            <option value="45jours">45 jours</option>
+                            <option value="60jours">60 jours</option>
                         </select>
                     </div>
                     <div>
-                        <label>Conditions particulières</label>
-                        <textarea></textarea>
+                        <label for="conditionsParticulieres">Conditions particulières</label>
+                        <textarea id="conditionsParticulieres" name="conditionsParticulieres"></textarea>
                     </div>
                 </div>
                 <!-- Bouton et container pour les sections dynamiques -->
@@ -166,7 +168,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="surface">Surface en m²</label>
+                    <label for="surfacem2">Surface en m²</label>
                     <input type="number" id="surfacem2" name="surface" step="0.01" min="0"  value="1" required>
                 </div>
 

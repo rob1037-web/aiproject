@@ -64,35 +64,35 @@ document.addEventListener('DOMContentLoaded', function() {
         doc.rect(0, 0, 210, 30, 'F');
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(pdfConfig.headerFontSize);
-        doc.text('DEVIS', 105, 15, { align: 'center' });
+        doc.text('Devis Nettoyage Pro', 105, 15, { align: 'center' });
         doc.setTextColor(0, 0, 0);
         yPosition = 40;
 
         // Informations entreprise
         const entrepriseInfo = {
-            'Nom de l\'entreprise': document.getElementById('entrepriseNom').value,
-            'SIRET': document.getElementById('siret').value,
-            'Adresse': document.getElementById('entrepriseAdresse').value,
-            'Contact': document.getElementById('entrepriseContact').value
+            'Nom de l\'entreprise': document.getElementById('entrepriseNom').value || '',
+            'SIRET': document.getElementById('siret').value || '',
+            'Adresse': document.getElementById('entrepriseAdresse').value || '',
+            'Contact': document.getElementById('entrepriseContact').value || ''
         };
+
+        // Paiements et Règlements
         ajouterSection('Informations Entreprise', entrepriseInfo);
+        const paiementInfo = {
+            'Mode de paiement': document.getElementById('modePaiement').value || '',
+            'Délai de paiement': document.getElementById('delaiPaiement').value || '',
+            'Conditions particulières': document.getElementById('conditionsParticulieres').value || ''
+        };
+        ajouterSection('Paiements et Règlements', paiementInfo);
 
         // Informations client
         const clientInfo = {
-            'Nom/Raison sociale': document.getElementById('clientNom').value,
-            'Email': document.getElementById('clientEmail').value,
-            'Téléphone': document.getElementById('clientTel').value,
-            'Adresse': document.getElementById('clientAdresse').value
+            'Nom/Raison sociale': document.getElementById('clientNom').value || '',
+            'Email': document.getElementById('clientEmail').value || '',
+            'Téléphone': document.getElementById('clientTel').value || '',
+            'Adresse': document.getElementById('clientAdresse').value || ''
         };
         ajouterSection('Informations Client', clientInfo);
-
-        // Paiements et Règlements
-        const paiementInfo = {
-            'Mode de paiement': document.getElementById('modePaiement').value,
-            'Délai de paiement': document.getElementById('delaiPaiement').value,
-            'Conditions particulières': document.getElementById('conditionsParticulieres').value
-        };
-        ajouterSection('Paiements et Règlements', paiementInfo);
 
         // Détails prestation
         const typesNettoyage = Array.from(document.getElementById('typeNettoyage').selectedOptions)
@@ -100,30 +100,30 @@ document.addEventListener('DOMContentLoaded', function() {
             .join(', ');
 
         const prestationInfo = {
-            'Surface': `${document.getElementById('surface').value} m²`,
+            'Surface': `${document.getElementById('surface').value || 0} m²`,
             'Types de nettoyage': typesNettoyage,
-            'Fréquence': document.getElementById('frequence').options[document.getElementById('frequence').selectedIndex].text
+            'Fréquence': document.getElementById('frequence').options[document.getElementById('frequence').selectedIndex].text || ''
         };
         ajouterSection('Détails de la Prestation', prestationInfo);
 
         // Tarification avec calculs
-        const surface = parseFloat(document.getElementById('surface').value) || 0;
+        const surface = parseFloat(document.getElementById('surfacem2').value) || 0;
         const prixUnitaire = parseFloat(document.getElementById('prixUnitaire').value) || 0;
         const totalHT = surface * prixUnitaire;
         const tva = totalHT * 0.20;
         const totalTTC = totalHT + tva;
 
         const tarificationInfo = {
-            'Surface': `${surface} m²`,
+            'surface': `${surface} m²`,
             'Prix au m²': `${prixUnitaire.toFixed(2)} €`,
-            'Total HT': `${totalHT.toFixed(2)} €`,
+            'total HT': `${totalHT.toFixed(2)} €`,
             'TVA (20%)': `${tva.toFixed(2)} €`,
             'Total TTC': `${totalTTC.toFixed(2)} €`
         };
         ajouterSection('Tarification', tarificationInfo);
 
         // Commentaires
-        const commentaires = document.getElementById('commentaires').value;
+        const commentaires = document.getElementById('commentaires').value || '';
         if (commentaires.trim() !== '') {
             yPosition += 5;
             ajouterSection('Commentaires', { '': commentaires });
@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Sauvegarde
         try {
             doc.save(`devis-${numeroDevis}.pdf`);
+            console.log('PDF généré avec succès.');
         } catch (error) {
             console.error('Erreur lors de la génération du PDF:', error);
             alert('Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.');
