@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="assets/css/js/calculator.js" defer></script>
+    <script src="assets/css/js/validation.js" defer></script>
+    <script src="assets/css/js/pdf-generator.js" defer></script>
+    <script src="assets/css/js/uploader.js" defer></script>
+    <script src="assets/css/js/sections-dynamiques.js"defer></script>
+    <script src="assets/css/js/services.js" defer></script>
+ 
+
+    <style>
+        .logo-upload button {
+            padding: 0px 0px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-upload img {
+            max-height: 40px;
+            width: auto;
+        }
+    </style>
+    </head>
+   
+<body>
+    <header>
+        <div class="logo-container">
+            <h1>Devis Nettoyage Pro</h1>
+        </div>
+        <div class="logo-upload">
+            <button onclick="document.getElementById('logo-input').click()">
+                <img id="logo-preview" src="#" alt="Logo" style="display: none; height: 40px;">
+                <span id="upload-text">Choisi un logo</span>
+            </button>
+            <input type="file" id="logo-input" accept="image/*" style="display: none;">
+        </div>
+
+        <!-- Dans votre header -->
+
+    </header>
+    
+    
+    <div class="container">
+        <form id="devisForm">
+            <!-- Section Entreprise -->
+            <section class="form-section">
+                <h2>Informations Entreprise</h2>
+                <div class="form-group">
+                    <label for="entrepriseNom">Nom de l'entreprise *</label>
+                    <input type="text" id="entrepriseNom" name="entrepriseNom" required>
+                </div>
+                <div class="form-group">
+                    <label for="siret">SIRET *</label>
+                    <input type="text" id="siret" name="siret" pattern="[0-9]{14}" required>
+                </div>
+                <div class="form-group">
+                    <label for="entrepriseAdresse">Adresse *</label>
+                    <textarea id="entrepriseAdresse" name="entrepriseAdresse" rows="3" required></textarea></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="entrepriseContact">Contact référent</label>
+                    <input type="text" id="entrepriseContact" name="entrepriseContact">
+                </div>
+                <div>
+                    <h3>Paiements et Règlements</h3>
+                    <div>
+                        <label>Mode de paiement</label>
+                        <select>
+                            <option>Virement bancaire</option>
+                            <option>Chèque</option>
+                            <option>Carte bancaire</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Délai de paiement</label>
+                        <select>
+                            <option>À réception</option>
+                            <option>30 jours</option>
+                            <option>45 jours</option>
+                            <option>60 jours</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Conditions particulières</label>
+                        <textarea></textarea>
+                    </div>
+                </div>
+                <!-- Bouton et container pour les sections dynamiques -->
+
+            </section>
+
+            <!-- Section Client -->
+            <section class="form-section">
+                <h2>Informations Client</h2>
+                <div class="form-group">
+                    <label for="clientNom">Nom/Raison sociale *</label>
+                    <input type="text" id="clientNom" name="clientNom" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientEmail">Email *</label>
+                    <input type="email" id="clientEmail" name="clientEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="clientTel">Téléphone</label>
+                    <input type="tel" id="clientTel" name="clientTel">
+                </div>
+                <div class="form-group">
+                    <label for="clientAdresse">Adresse</label>
+                    <textarea id="clientAdresse" name="clientAdresse" rows="3"></textarea>
+                </div>
+            </section>
+
+            <!-- Section Prestations -->
+            <section class="form-section">
+                <h2>Prestations</h2>
+                <div class="form-group">
+                    <label for="surface">Surface en m² *</label>
+                    <input type="number" id="surface" name="surface" min="1" required>
+                </div>
+                <form id="serviceForm">
+                    <div class="form-group service-selection">
+                        <label for="typeNettoyage">Services (produits) *</label>
+                        <div class="custom-service-input">
+                            <input type="text" 
+                                   id="newServiceInput" 
+                                   placeholder="Saisissez un nouveau service"
+                                   autocomplete="off">
+                            <button type="button" id="addServiceBtn">Ajouter</button>
+                        </div>
+                        <select id="typeNettoyage" name="typeNettoyage" multiple required>
+                            <option value="bureaux">Bureaux</option>
+                            <option value="vitres">Vitres</option>
+                            <option value="sols">Sols</option>
+                            <option value="sanitaires">Sanitaires</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <label for="frequence">Fréquence</label>
+                    <select id="frequence" name="frequence">
+                        <option value="quotidien">Quotidienne</option>
+                        <option value="hebdomadaire">Hebdomadaire</option>
+                        <option value="mensuel">Mensuelle</option>
+                        <option value="ponctuel">Ponctuelle</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Section Tarification -->
+            <section class="form-section">
+                <h2>Tarification</h2>
+                
+                <div class="form-group">
+                    <label for="prixUnitaire">Prix au m² (€)</label>
+                    <input type="number" id="prixUnitaire" name="prixUnitaire" step="0.01" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="surface">Surface en m²</label>
+                    <input type="number" id="surfacem2" name="surface" step="0.01" min="0"  value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Total HT</label>
+                    <span id="totalHT">0.00 €</span>
+                </div>
+
+                <div class="form-group">
+                    <label>TVA (20%)</label>
+                    <span id="tva">0.00 €</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Total TTC</label>
+                    <span id="totalTTC">0.00 €</span>
+                </div>
+            </section>
+
+
+            </section>
+
+            <!-- Section Commentaires -->
+            <section class="form-section">
+                <h2>Commentaires et Conditions</h2>
+                <div class="form-group">
+                    <label for="commentaires">Commentaires additionnels</label>
+                    <textarea id="commentaires" name="commentaires" rows="4"></textarea>
+                </div>
+            </section>
+
+            <!-- Section Boutons -->
+            <section class="form-section">
+                <div id="errorContainer"></div>
+                <div class="button-group">
+                    <button type="submit" class="button">Enregistrer</button>
+                    <button type="button" id="generatePDF" class="button">Générer PDF</button>
+                </div>
+            </section>
+
+            <section class="contractualisation">
+                <h2>CONTRACTUALISATION</h2>
+                
+                <div class="form-group">
+                    <label for="duree-validite">Durée de validité du contrat</label>
+                    <input type="text" 
+                           id="duree-validite" 
+                           name="duree-validite" 
+                           placeholder="Ex: 6 mois" 
+                           required>
+                </div>
+        
+                <div class="form-group signature-section">
+                    <label for="signature">Lu et approuvé - Signature</label>
+                    <textarea id="signature" 
+                              name="signature" 
+                              placeholder="Écrivez 'Lu et approuvé' suivi de votre signature" 
+                              required></textarea>
+                </div>
+        
+                <footer class="mentions-legales">
+                    <p>
+                        Les informations recueillies font l'objet d'un traitement informatique destiné à la gestion de votre contrat. 
+                        Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès 
+                        et de rectification aux informations qui vous concernent. Pour exercer ce droit, veuillez nous contacter via notre 
+                        service client.
+                    </p>
+                </footer>
+            </section>
+        
+        </form>
+    </div>
+</body>
+</html>
