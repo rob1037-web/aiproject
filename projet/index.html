@@ -199,10 +199,11 @@
             <input type="text" id="dureeValidite">
         </div>
         <div class="signature-section">
-            <p>Lu et approuvé : </p>
-            <textarea id="luApprouve" placeholder="Écrire 'Lu et approuvé' ici..."></textarea>
-            <p>Signature : </p>
-            <canvas id="signaturePad"></canvas>
+            <p>Lu et approuvé </p>
+            <textarea id="luApprouve"></textarea>
+            <canvas id="signaturePad" style="border: 1px solid #000; background-color: #fff; width: 400px; height: 200px;"></canvas>
+            <button type="button" id="clearSignature">Effacer la signature</button>
+        </div>
         </div>
         <p class="legal">
             Les informations recueillies font l'objet d'un traitement informatique destiné à la gestion de votre contrat. 

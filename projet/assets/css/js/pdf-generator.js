@@ -139,11 +139,23 @@ doc.text("Durée de validité du contrat: " + (document.getElementById('dureeVal
 doc.text("Lu et approuvé: " + (document.getElementById('luApprouve')?.value || ''), contractualisationX, nextY + pdfConfig.lineHeight * 2);
 
 // Signature
-        const canvas = document.getElementById('signaturePad');
-        if (canvas) {
-            const imgData = canvas.toDataURL('image/png');
-            //doc.addImage(imgData, 'PNG', pdfConfig.marginLeft, doc.lastAutoTable.finalY + pdfConfig.lineHeight * 11, 180, 60);
-        }
+const canvas = document.getElementById('signaturePad');
+if (canvas) {
+    const imgData = canvas.toDataURL('image/png');
+    const signatureHeight = 40; // Réduire la hauteur de la signature
+    const signatureWidth = 120; // Réduire la largeur de la signature
+    const availableHeight = doc.internal.pageSize.getHeight() - doc.lastAutoTable.finalY - pdfConfig.marginBottom;
+
+    // Vérifier si la signature tient dans l'espace disponible
+    if (signatureHeight > availableHeight) {
+        // Ajuster la taille de la signature pour qu'elle tienne dans l'espace disponible
+        const scaleFactor = availableHeight / signatureHeight;
+        signatureHeight *= scaleFactor;
+        signatureWidth *= scaleFactor;
+    }
+
+    doc.addImage(imgData, 'PNG', pdfConfig.marginLeft, doc.lastAutoTable.finalY + pdfConfig.lineHeight * 2, signatureWidth, signatureHeight);
+}
 
         // Sauvegarder le PDF
         doc.save('devis.pdf');
