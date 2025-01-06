@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const newServiceInput = document.getElementById('newServiceInput');
     const addServiceBtn = document.getElementById('addServiceBtn');
-    const serviceSelect = document.getElementById('typeNettoyage');
+    const serviceSelect = document.getElementById('services');
 
     // Charger les services sauvegardés
     loadServices();

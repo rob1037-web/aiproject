@@ -3,243 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis Nettoyage Pro</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="assets/css/js/calculator.js" defer></script>
-    <script src="assets/css/js/validation.js" defer></script>
-    <script src="assets/css/js/pdf-generator.js" defer></script>
-    <script src="assets/css/js/uploader.js" defer></script>
-    <script src="assets/css/js/sections-dynamiques.js" defer></script>
-    <script src="assets/css/js/services.js" defer></script>
- 
-
     <style>
-        .logo-upload button {
-            padding: 0px 0px;
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
+        .logo-preview {
+            display: none;
+            max-width: 150px; /* Ajustez cette valeur selon vos besoins */
+            margin-top: 10px;
+        }
+
+        .header-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
         }
 
-        .logo-upload img {
-            max-height: 40px;
-            width: auto;
+        .header-container h1 {
+            flex: 1;
+            text-align: center;
+        }
+
+        .custom-service-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .custom-service-input input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
     </style>
-    </head>
-   
+</head>
 <body>
-    <header>
-        <div class="logo-container">
-            <h1>Devis Nettoyage Pro</h1>
-        </div>
-        <div class="logo-upload">
-            <button onclick="document.getElementById('logo-input').click()">
-                <img id="logo-preview" src="#" alt="Logo" style="display: none; height: 40px;">
-                <span id="upload-text">Choisi un logo</span>
-            </button>
-            <input type="file" id="logo-input" accept="image/*" style="display: none;">
-        </div>
-
-        <!-- Dans votre header -->
-
-    </header>
-    
-    
-    <div class="container">
-        <form id="devisForm">
-            <!-- Section Entreprise -->
-            <section class="form-section">
-                <h2>Informations Entreprise</h2>
-                <div class="form-group">
-                    <label for="entrepriseNom">Nom de l'entreprise *</label>
-                    <input type="text" id="entrepriseNom" name="entrepriseNom" required>
-                </div>
-                <div class="form-group">
-                    <label for="siret">SIRET *</label>
-                    <input type="text" id="siret" name="siret" pattern="[0-9]{14}" required>
-                </div>
-                <div class="form-group">
-                    <label for="entrepriseAdresse">Adresse *</label>
-                    <textarea id="entrepriseAdresse" name="entrepriseAdresse" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="entrepriseContact">Contact référent</label>
-                    <input type="text" id="entrepriseContact" name="entrepriseContact">
-                </div>
-                <div>
-                    <h3>Paiements et Règlements</h3>
-                    <div>
-                        <label for="modePaiement">Mode de paiement</label>
-                        <select id="modePaiement" name="modePaiement">
-                            <option value="">Sélectionnez un mode de paiement</option>
-                            <option value="virement">Virement bancaire</option>
-                            <option value="cheque">Chèque</option>
-                            <option value="carte">Carte bancaire</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="delaiPaiement">Délai de paiement</label>
-                        <select id="delaiPaiement" name="delaiPaiement">
-                            <option value="">Sélectionnez un délai de paiement</option>
-                            <option value="reception">À réception</option>
-                            <option value="30jours">30 jours</option>
-                            <option value="45jours">45 jours</option>
-                            <option value="60jours">60 jours</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="conditionsParticulieres">Conditions particulières</label>
-                        <textarea id="conditionsParticulieres" name="conditionsParticulieres"></textarea>
-                    </div>
-                </div>
-                <!-- Bouton et container pour les sections dynamiques -->
-
-            </section>
-
-            <!-- Section Client -->
-            <section class="form-section">
-                <h2>Informations Client</h2>
-                <div class="form-group">
-                    <label for="clientNom">Nom/Raison sociale *</label>
-                    <input type="text" id="clientNom" name="clientNom" required>
-                </div>
-                <div class="form-group">
-                    <label for="clientEmail">Email *</label>
-                    <input type="email" id="clientEmail" name="clientEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="clientTel">Téléphone</label>
-                    <input type="tel" id="clientTel" name="clientTel">
-                </div>
-                <div class="form-group">
-                    <label for="clientAdresse">Adresse</label>
-                    <textarea id="clientAdresse" name="clientAdresse" rows="3"></textarea>
-                </div>
-            </section>
-
-            <!-- Section Prestations -->
-            <section class="form-section">
-                <h2>Prestations</h2>
-                <div class="form-group">
-                    <label for="surface">Surface en m² *</label>
-                    <input type="number" id="surface" name="surface" min="1" required>
-                </div>
-                <form id="serviceForm">
-                    <div class="form-group service-selection">
-                        <label for="typeNettoyage">Services (produits) *</label>
-                        <div class="custom-service-input">
-                            <input type="text" 
-                                   id="newServiceInput" 
-                                   placeholder="Saisissez un nouveau service"
-                                   autocomplete="off">
-                            <button type="button" id="addServiceBtn">Ajouter</button>
-                        </div>
-                        <select id="typeNettoyage" name="typeNettoyage" multiple required>
-                            <option value="bureaux">Bureaux</option>
-                            <option value="vitres">Vitres</option>
-                            <option value="sols">Sols</option>
-                            <option value="sanitaires">Sanitaires</option>
-                        </select>
-                    </div>
-                </form>
-                <div class="form-group">
-                    <label for="frequence">Fréquence</label>
-                    <select id="frequence" name="frequence">
-                        <option value="quotidien">Quotidienne</option>
-                        <option value="hebdomadaire">Hebdomadaire</option>
-                        <option value="mensuel">Mensuelle</option>
-                        <option value="ponctuel">Ponctuelle</option>
-                    </select>
-                </div>
-            </section>
-
-            <!-- Section Tarification -->
-            <section class="form-section">
-                <h2>Tarification</h2>
-                
-                <div class="form-group">
-                    <label for="prixUnitaire">Prix au m² (€)</label>
-                    <input type="number" id="prixUnitaire" name="prixUnitaire" step="0.01" min="0" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="surfacem2">Surface en m²</label>
-                    <input type="number" id="surfacem2" name="surface" step="0.01" min="0"  value="1" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Total HT</label>
-                    <span id="totalHT">0.00 €</span>
-                </div>
-
-                <div class="form-group">
-                    <label>TVA (20%)</label>
-                    <span id="tva">0.00 €</span>
-                </div>
-
-                <div class="form-group">
-                    <label>Total TTC</label>
-                    <span id="totalTTC">0.00 €</span>
-                </div>
-            </section>
-
-
-            </section>
-
-            <!-- Section Commentaires -->
-            <section class="form-section">
-                <h2>Commentaires et Conditions</h2>
-                <div class="form-group">
-                    <label for="commentaires">Commentaires additionnels</label>
-                    <textarea id="commentaires" name="commentaires" rows="4"></textarea>
-                </div>
-            </section>
-
-            <!-- Section Boutons -->
-            <section class="form-section">
-                <div id="errorContainer"></div>
-                <div class="button-group">
-                    <button type="submit" class="button">Enregistrer</button>
-                    <button type="button" id="generatePDF" class="button">Générer PDF</button>
-                </div>
-            </section>
-
-            <section class="contractualisation">
-                <h2>CONTRACTUALISATION</h2>
-                
-                <div class="form-group">
-                    <label for="duree-validite">Durée de validité du contrat</label>
-                    <input type="text" 
-                           id="duree-validite" 
-                           name="duree-validite" 
-                           placeholder="Ex: 6 mois" 
-                           required>
-                </div>
-        
-                <div class="form-group signature-section">
-                    <label for="signature">Lu et approuvé - Signature</label>
-                    <textarea id="signature" 
-                              name="signature" 
-                              placeholder="Écrivez 'Lu et approuvé' suivi de votre signature" 
-                              required></textarea>
-                </div>
-        
-                <footer class="mentions-legales">
-                    <p>
-                        Les informations recueillies font l'objet d'un traitement informatique destiné à la gestion de votre contrat. 
-                        Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès 
-                        et de rectification aux informations qui vous concernent. Pour exercer ce droit, veuillez nous contacter via notre 
-                        service client.
-                    </p>
-                </footer>
-            </section>
-        
-        </form>
+    <div class="header-container">
+        <!-- Bouton Choisir un fichier -->
+        <label class="custom-file-upload" id="upload-text">
+            <input type="file" id="logo-input" class="file-input" accept="image/*">
+        </label>
+        <img id="logo-preview" class="logo-preview" alt="Logo Preview">
+        <h1>Devis Nettoyage Pro</h1>
     </div>
+
+    <!-- Informations Entreprise -->
+    <h2>Informations Entreprise</h2>
+    <div>
+        <label for="entrepriseNom">Nom de l'entreprise *</label>
+        <input type="text" id="entrepriseNom" required>
+    </div>
+    <div>
+        <label for="siret">SIRET *</label>
+        <input type="text" id="siret" maxlength="14" pattern="[0-9]{14}" required>
+    </div>
+    <div>
+        <label for="adresse">Adresse *</label>
+        <input type="text" id="adresse" required>
+    </div>
+    <div>
+        <label for="contact">Contact référent</label>
+        <input type="text" id="contact">
+    </div>
+
+    <!-- Informations Client -->
+    <h2>Informations Client</h2>
+    <table id="clientTable">
+        <tr>
+            <th>Nom/Raison sociale *</th>
+            <th>Email *</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+        </tr>
+        <tr>
+            <td><input type="text" id="clientNom" required></td>
+            <td><input type="email" id="clientEmail" required></td>
+            <td><input type="tel" id="clientTel"></td>
+            <td><input type="text" id="clientAdresse"></td>
+        </tr>
+    </table>
+
+    <!-- Prestations -->
+    <h2>Prestations</h2>
+    <table id="prestationsTable">
+        <tr>
+            <th>Surface (m²) *</th>
+            <th>Services *</th>
+            <th>Fréquence</th>
+        </tr>
+        <tr>
+            <td><input type="number" id="surface" required></td>
+            <td>
+                <select id="services" multiple required>
+                    <option value="bureaux">Bureaux</option>
+                    <option value="vitres">Vitres</option>
+                    <option value="sols">Sols</option>
+                    <option value="sanitaires">Sanitaires</option>
+                </select>
+                <div class="custom-service-input">
+                    <input type="text" id="newServiceInput" placeholder="Ajouter un nouveau service">
+                    <button type="button" id="addServiceBtn">Ajouter</button>
+                </div>
+            </td>
+            <td>
+                <select id="frequence">
+                    <option value="quotidien">Quotidienne</option>
+                    <option value="hebdomadaire">Hebdomadaire</option>
+                    <option value="mensuel">Mensuelle</option>
+                    <option value="ponctuel">Ponctuelle</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Tarification -->
+    <h2>Tarification</h2>
+    <table id="tarificationTable">
+        <tr>
+            <th>Prix au m² (€)</th>
+            <th>Surface (m²)</th>
+            <th>Total HT</th>
+            <th>TVA (20%)</th>
+            <th>Total TTC</th>
+        </tr>
+        <tr>
+            <td><input type="number" id="prixUnitaire" step="0.01"></td>
+            <td><input type="number" id="surfaceTarif"></td>
+            <td><span id="totalHT">0.00 €</span></td>
+            <td><span id="tva">0.00 €</span></td>
+            <td><span id="totalTTC">0.00 €</span></td>
+        </tr>
+    </table>
+
+   <!-- Paiements et Règlements -->
+<h2>Paiements et Règlements</h2>
+<table id="paiementsTable">
+    <tr>
+        <th>Description</th>
+        <th>Détails</th>
+    </tr>
+    <tr>
+        <td>Mode de paiement</td>
+        <td>
+            <select id="modePaiement">
+                <option value="">Sélectionnez un mode de paiement</option>
+                <option value="virement">Virement bancaire</option>
+                <option value="cheque">Chèque</option>
+                <option value="carte">Carte bancaire</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Délai de paiement</td>
+        <td>
+            <select id="delaiPaiement">
+                <option value="">Sélectionnez un délai de paiement</option>
+                <option value="reception">À réception</option>
+                <option value="30">30 jours</option>
+                <option value="45">45 jours</option>
+                <option value="60">60 jours</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Conditions particulières</td>
+        <td>
+            <textarea id="conditions" rows="4"></textarea>
+        </td>
+    </tr>
+</table>
+
+
+    <!-- Commentaires -->
+    <h2>Commentaires</h2>
+    <table id="commentairesTable">
+        <tr>
+            <th>Commentaires additionnels</th>
+        </tr>
+        <tr>
+            <td><textarea id="commentaires" rows="4"></textarea></td>
+        </tr>
+    </table>
+
+    <!-- Boutons -->
+    <div class="button-container">
+        <button type="button" id="enregistrer">Enregistrer</button>
+        <button type="button" id="generatePDF">Générer PDF</button>
+    </div>
+
+    <!-- Contractualisation -->
+    <div class="contractualisation">
+        <h2>CONTRACTUALISATION</h2>
+        <div>
+            <label for="dureeValidite">Durée de validité du contrat :</label>
+            <input type="text" id="dureeValidite">
+        </div>
+        <div class="signature-section">
+            <p>Lu et approuvé : </p>
+            <textarea id="luApprouve" placeholder="Écrire 'Lu et approuvé' ici..."></textarea>
+            <p>Signature : </p>
+            <canvas id="signaturePad"></canvas>
+        </div>
+        <p class="legal">
+            Les informations recueillies font l'objet d'un traitement informatique destiné à la gestion de votre contrat. 
+            Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée, vous bénéficiez d'un droit d'accès 
+            et de rectification aux informations qui vous concernent. Pour exercer ce droit, veuillez nous contacter via notre 
+            service client.
+        </p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+    <script src="assets/css/js/uploader.js"></script>
+    <script src="assets/css/js/services.js"></script>
+    <script src="assets/css/js/calculator.js"></script>
+    <script src="assets/css/js/signature.js"></script>
+    <script src="assets/css/js/pdf-generator.js"></script>
 </body>
 </html>
