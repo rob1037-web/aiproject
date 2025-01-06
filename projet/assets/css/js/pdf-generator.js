@@ -14,182 +14,131 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function genererPDF() {
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: 'a4'
-        });
+        const doc = new jsPDF();
 
-        let yPosition = pdfConfig.marginTop;
-        function ajouterLigne(texte, options = {}) {
-            const defaults = {
-                fontSize: pdfConfig.fontSize,
-                fontStyle: 'normal',
-                align: 'left'
-            };
-            const params = { ...defaults, ...options };
-            
-            doc.setFontSize(params.fontSize);
-            doc.setFont('helvetica', params.fontStyle);
-            
-            if (yPosition > 270) {
-                doc.addPage();
-                yPosition = pdfConfig.marginTop;
-            }
-            
-            const xPos = params.align === 'right' ? 
-                190 : // Pour l'alignement à droite
-                pdfConfig.marginLeft;
-            
-            doc.text(texte, xPos, yPosition, {
-                align: params.align,
-                maxWidth: 170
-            });
-            yPosition += pdfConfig.lineHeight;
-        }
+        // Ajouter le contenu du PDF
+        doc.text("Devis Nettoyage Pro", pdfConfig.marginLeft, pdfConfig.marginTop);
 
-        function ajouterSection(titre, contenu) {
-            ajouterLigne(titre, { fontSize: pdfConfig.subHeaderFontSize, fontStyle: 'bold' });
-            yPosition += 2;
-            Object.entries(contenu).forEach(([label, value]) => {
-                if (value && value.trim() !== '') {
-                    ajouterLigne(`${label} : ${value}`);
-                }
-            });
-            yPosition += 5;
-        }
-
-        // En-tête
-        doc.setFillColor(44, 62, 80);
-        doc.rect(0, 0, 210, 30, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(pdfConfig.headerFontSize);
-        doc.text('Devis Nettoyage Pro', 105, 15, { align: 'center' });
-        doc.setTextColor(0, 0, 0);
-        yPosition = 40;
-
-        // Informations entreprise
-        const entrepriseInfo = {
-            'Nom de l\'entreprise': document.getElementById('entrepriseNom').value || '',
-            'SIRET': document.getElementById('siret').value || '',
-            'Adresse': document.getElementById('entrepriseAdresse').value || '',
-            'Contact': document.getElementById('entrepriseContact').value || ''
-        };
+        // Informations Entreprise
+        doc.setFontSize(pdfConfig.subHeaderFontSize);
+        doc.text("Informations Entreprise", pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 2);
+        doc.setFontSize(pdfConfig.fontSize);
+        doc.text("Nom de l'entreprise: " + (document.getElementById('entrepriseNom')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 3);
+        doc.text("SIRET: " + (document.getElementById('siret')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 4);
+        doc.text("Adresse: " + (document.getElementById('adresse')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 5);
+        doc.text("Contact référent: " + (document.getElementById('contact')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 6);
 
         // Paiements et Règlements
-        ajouterSection('Informations Entreprise', entrepriseInfo);
-        const paiementInfo = {
-            'Mode de paiement': document.getElementById('modePaiement').value || '',
-            'Délai de paiement': document.getElementById('delaiPaiement').value || '',
-            'Conditions particulières': document.getElementById('conditionsParticulieres').value || ''
-        };
-        ajouterSection('Paiements et Règlements', paiementInfo);
+        doc.setFontSize(pdfConfig.subHeaderFontSize);
+        doc.text("Paiements et Règlements", pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 8);
+        doc.setFontSize(pdfConfig.fontSize);
+        doc.text("Mode de paiement: " + (document.getElementById('modePaiement')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 9);
+        doc.text("Délai de paiement: " + (document.getElementById('delaiPaiement')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 10);
+        doc.text("Conditions particulières: " + (document.getElementById('conditions')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 11);
 
-        // Informations client
-        const clientInfo = {
-            'Nom/Raison sociale': document.getElementById('clientNom').value || '',
-            'Email': document.getElementById('clientEmail').value || '',
-            'Téléphone': document.getElementById('clientTel').value || '',
-            'Adresse': document.getElementById('clientAdresse').value || ''
-        };
-        ajouterSection('Informations Client', clientInfo);
+        // Informations Client
+        doc.setFontSize(pdfConfig.subHeaderFontSize);
+        doc.text("Informations Client", pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 13);
+        doc.setFontSize(pdfConfig.fontSize);
+        doc.text("Nom/Raison sociale: " + (document.getElementById('clientNom')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 14);
+        doc.text("Email: " + (document.getElementById('clientEmail')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 15);
+        doc.text("Téléphone: " + (document.getElementById('clientTel')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 16);
+        doc.text("Adresse: " + (document.getElementById('clientAdresse')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 17);
 
-        // Détails prestation
-        const typesNettoyage = Array.from(document.getElementById('typeNettoyage').selectedOptions)
-            .map(option => option.text)
-            .join(', ');
+        // Prestations
+        doc.setFontSize(pdfConfig.subHeaderFontSize);
+        doc.text("Prestations", pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 19);
+        doc.setFontSize(pdfConfig.fontSize);
+        doc.text("Surface (m²): " + (document.getElementById('surface')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 20);
+        doc.text("Services: " + (Array.from(document.getElementById('services')?.selectedOptions || []).map(option => option.text).join(', ') || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 21);
+        doc.text("Fréquence: " + (document.getElementById('frequence')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 22);
 
-        const prestationInfo = {
-            'Surface': `${document.getElementById('surface').value || 0} m²`,
-            'Types de nettoyage': typesNettoyage,
-            'Fréquence': document.getElementById('frequence').options[document.getElementById('frequence').selectedIndex].text || ''
-        };
-        ajouterSection('Détails de la Prestation', prestationInfo);
+        // Tarification
+        doc.setFontSize(pdfConfig.subHeaderFontSize);
+        doc.text("Tarification", pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 24);
+        doc.setFontSize(pdfConfig.fontSize);
+        doc.text("Prix au m² (€): " + (document.getElementById('prixUnitaire')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 25);
+        doc.text("Surface (m²): " + (document.getElementById('surfaceTarif')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 26);
+        doc.text("Total HT: " + (document.getElementById('totalHT')?.textContent || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 27);
+        
+        doc.addPage();
 
-        // Tarification avec calculs
-        const surface = parseFloat(document.getElementById('surfacem2').value) || 0;
-        const prixUnitaire = parseFloat(document.getElementById('prixUnitaire').value) || 0;
-        const totalHT = surface * prixUnitaire;
-        const tva = totalHT * 0.20;
-        const totalTTC = totalHT + tva;
-
-        const tarificationInfo = {
-            'surface': `${surface} m²`,
-            'Prix au m²': `${prixUnitaire.toFixed(2)} €`,
-            'total HT': `${totalHT.toFixed(2)} €`,
-            'TVA (20%)': `${tva.toFixed(2)} €`,
-            'Total TTC': `${totalTTC.toFixed(2)} €`
-        };
-        ajouterSection('Tarification', tarificationInfo);
+        doc.text("TVA (20%): " + (document.getElementById('tva')?.textContent || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 2);
+        doc.text("Total TTC: " + (document.getElementById('totalTTC')?.textContent || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 3);
 
         // Commentaires
-        const commentaires = document.getElementById('commentaires').value || '';
-        if (commentaires.trim() !== '') {
-            yPosition += 5;
-            ajouterSection('Commentaires', { '': commentaires });
-        }
+        doc.setFontSize(pdfConfig.subHeaderFontSize);
+        doc.text("Commentaires", pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 4);
+        doc.setFontSize(pdfConfig.fontSize);
+        doc.text((document.getElementById('commentaires')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 5);
 
         // Contractualisation
-        yPosition += 10;
-        ajouterLigne('Contractualisation :', { fontStyle: 'bold' });
-        ajouterLigne('Le présent devis, dûment signé et daté, fera office de bon de commande.');
-        ajouterLigne('La signature de ce devis implique l\'acceptation de nos conditions générales de vente.');
-        
-        yPosition += 10;
-        ajouterLigne('Pour le prestataire :', { align: 'left' });
-        ajouterLigne('Pour le client :', { align: 'right' });
-        
-        yPosition += 20;
-        ajouterLigne('Signature et cachet :', { align: 'left' });
-        ajouterLigne('Bon pour accord :', { align: 'right' });
+        doc.setFontSize(pdfConfig.subHeaderFontSize);
+        doc.text("Contractualisation", pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 6);
+        doc.setFontSize(pdfConfig.fontSize);
+        doc.text("Durée de validité du contrat: " + (document.getElementById('dureeValidite')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 7);
+        doc.text("Lu et approuvé: " + (document.getElementById('luApprouve')?.value || ''), pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 8);
 
-        // Date
-        const dateStr = new Date().toLocaleDateString('fr-FR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
-        ajouterLigne(`Date : ${dateStr}`, { 
-            align: 'right',
-            fontSize: 12
-        });
-
-        // Numéro de devis
-        const numeroDevis = `DEVIS-${Date.now().toString().slice(-6)}`;
-        doc.setFontSize(8);
-        doc.text(numeroDevis, 105, 285, { align: 'center' });
-
-        // Sauvegarde
-        try {
-            doc.save(`devis-${numeroDevis}.pdf`);
-            console.log('PDF généré avec succès.');
-        } catch (error) {
-            console.error('Erreur lors de la génération du PDF:', error);
-            alert('Une erreur est survenue lors de la génération du PDF. Veuillez réessayer.');
+        // Signature
+        const canvas = document.getElementById('signaturePad');
+        if (canvas) {
+            const imgData = canvas.toDataURL('image/png');
+            //doc.addImage(imgData, 'PNG', pdfConfig.marginLeft, pdfConfig.marginTop + pdfConfig.lineHeight * 9, 180, 60);
         }
+
+         // Ajouter les tableaux dynamiques
+         const prestationsData = [];
+         document.querySelectorAll('#prestationsTable tr').forEach(row => {
+             const cells = row.querySelectorAll('td');
+             if (cells.length > 0 && cells[0].querySelector('input').value) {
+                 prestationsData.push(Array.from(cells).map(cell => cell.querySelector('input, select').value));
+             }
+         });
+ 
+         if (prestationsData.length > 0) {
+             doc.autoTable({
+                 head: [['Surface (m²)', 'Services', 'Fréquence']],
+                 body: prestationsData,
+                 startY: pdfConfig.marginTop + pdfConfig.lineHeight * 9
+             });
+         }
+ 
+         const tarificationData = [];
+         document.querySelectorAll('#tarificationTable tr').forEach(row => {
+             const cells = row.querySelectorAll('td');
+             if (cells.length > 0 && cells[0].querySelector('input').value) {
+                 tarificationData.push(Array.from(cells).map(cell => cell.querySelector('input, span').textContent || cell.querySelector('input').value));
+             }
+         });
+ 
+         if (tarificationData.length > 0) {
+             doc.autoTable({
+                 head: [['Prix au m² (€)', 'Surface (m²)', 'Total HT', 'TVA (20%)', 'Total TTC']],
+                 body: tarificationData,
+                 startY: doc.lastAutoTable.finalY + pdfConfig.lineHeight
+             });
+         }
+ 
+         const commentairesData = [];
+         document.querySelectorAll('#commentairesTable tr').forEach(row => {
+             const cells = row.querySelectorAll('td');
+             if (cells.length > 0 && cells[0].querySelector('textarea').value) {
+                 commentairesData.push([cells[0].querySelector('textarea').value]);
+             }
+         });
+ 
+         if (commentairesData.length > 0) {
+             doc.autoTable({
+                 head: [['Commentaires additionnels']],
+                 body: commentairesData,
+                 startY: doc.lastAutoTable.finalY + pdfConfig.lineHeight
+             });
+         }
+
+        // Sauvegarder le PDF
+        doc.save('devis.pdf');
     }
 
     // Événement génération
-    generatePDFButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const requiredFields = document.querySelectorAll('[required]');
-        let allFieldsValid = true;
-        
-        requiredFields.forEach(field => {
-            if (!field.value) {
-                allFieldsValid = false;
-                field.classList.add('error');
-            } else {
-                field.classList.remove('error');
-            }
-        });
-
-        if (!allFieldsValid) {
-            alert('Veuillez remplir tous les champs obligatoires avant de générer le PDF.');
-            return;
-        }
-
-        genererPDF();
-    });
+    generatePDFButton.addEventListener('click', genererPDF);
 });

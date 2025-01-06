@@ -1,29 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Récupération des éléments du DOM
     const prixUnitaire = document.getElementById('prixUnitaire');
-    const surface = document.getElementById('surfacem2');
+    const surfaceTarif = document.getElementById('surfaceTarif');
     const totalHT = document.getElementById('totalHT');
     const tva = document.getElementById('tva');
     const totalTTC = document.getElementById('totalTTC');
 
     // Forcer l'initialisation des valeurs dès le départ
-    surface.value = surface.value || "1";
+    surfaceTarif.value = surfaceTarif.value || "1";
     prixUnitaire.value = prixUnitaire.value || "0";
 
     function calculer() {
         // Forcer des valeurs numériques valides
         let prixUnitaireVal = Math.max(0, Number(prixUnitaire.value));
-        let surfaceVal = Math.max(0, Number(surface.value));
+        let surfaceVal = Math.max(0, Number(surfaceTarif.value));
 
         // S'assurer que la surface n'est jamais vide
-        if (!surface.value || surface.value === '') {
-            surface.value = "1";
+        if (!surfaceTarif.value || surfaceTarif.value === '') {
+            surfaceTarif.value = "1";
             surfaceVal = 1;
         }
 
         console.log('Valeurs actuelles:', {
             'Prix saisi': prixUnitaire.value,
-            'Surface saisie': surface.value,
+            'Surface saisie': surfaceTarif.value,
             'Prix converti': prixUnitaireVal,
             'Surface convertie': surfaceVal
         });
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         calculer();
     });
 
-    surface.addEventListener('input', function(e) {
+    surfaceTarif.addEventListener('input', function(e) {
         if (!e.target.value) {
             e.target.value = "1";
         }
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Protection contre les valeurs négatives
-    surface.addEventListener('change', function(e) {
+    surfaceTarif.addEventListener('change', function(e) {
         if (Number(e.target.value) <= 0) {
             e.target.value = "1";
             calculer();
