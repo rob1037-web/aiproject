@@ -1,0 +1,314 @@
+/* === PREVIEW DESIGN SYSTEM === */
+:root {
+    /* Colors */
+    --preview-bg: #FFFFFF;
+    --preview-border: #DFE1E6;
+    --preview-text: #172B4D;
+    --preview-meta: #6B778C;
+    --preview-toolbar-bg: #F4F5F7;
+    
+    /* Dimensions */
+    --preview-width: 210mm;  /* Format A4 */
+    --preview-height: 297mm; /* Format A4 */
+    --preview-padding: 40px;
+    --preview-toolbar-height: 48px;
+}
+
+/* === PREVIEW CONTAINER === */
+.preview-container {
+    position: relative;
+    background: var(--preview-bg);
+    border: 1px solid var(--preview-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 24px 0;
+    overflow: hidden;
+}
+
+/* Toolbar */
+.preview-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--preview-toolbar-height);
+    padding: 0 16px;
+    background: var(--preview-toolbar-bg);
+    border-bottom: 1px solid var(--preview-border);
+}
+
+.preview-toolbar-left,
+.preview-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.preview-toolbar button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid var(--preview-border);
+    border-radius: 4px;
+    background: var(--preview-bg);
+    color: var(--preview-text);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preview-toolbar button:hover {
+    background: #EBECF0;
+}
+
+.preview-toolbar button i {
+    font-size: 16px;
+}
+
+/* Zoom Controls */
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.zoom-level {
+    padding: 4px 8px;
+    background: var(--preview-bg);
+    border: 1px solid var(--preview-border);
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+/* Preview Content */
+.preview-content {
+    padding: var(--preview-padding);
+    min-height: calc(var(--preview-height) * 0.5);
+    background: var(--preview-bg);
+    overflow-y: auto;
+}
+
+/* Page Format */
+.preview-page {
+    width: 100%;
+    max-width: var(--preview-width);
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Document Elements */
+.preview-header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.preview-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--preview-text);
+    margin-bottom: 8px;
+}
+
+.preview-meta {
+    font-size: 0.875rem;
+    color: var(--preview-meta);
+}
+
+.preview-section {
+    margin-bottom: 24px;
+}
+
+.preview-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--preview-text);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--preview-border);
+}
+
+/* Tables in Preview */
+.preview-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.preview-table th,
+.preview-table td {
+    padding: 12px;
+    border: 1px solid var(--preview-border);
+    text-align: left;
+}
+
+.preview-table th {
+    background: #F4F5F7;
+    font-weight: 500;
+}
+
+/* Signatures Area */
+.signatures-area {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.signature-box {
+    border: 1px solid var(--preview-border);
+    padding: 20px;
+    min-height: 120px;
+    border-radius: 4px;
+}
+
+.signature-title {
+    font-size: 0.875rem;
+    color: var(--preview-meta);
+    margin-bottom: 8px;
+}
+
+/* Loading State */
+.preview-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background: var(--preview-bg);
+}
+
+.preview-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--preview-border);
+    border-top-color: var(--preview-text);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Full Screen Mode */
+.preview-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: var(--preview-bg);
+}
+
+.preview-fullscreen .preview-content {
+    height: calc(100vh - var(--preview-toolbar-height));
+}
+
+/* Print Mode Styles */
+@media print {
+    .preview-toolbar {
+        display: none;
+    }
+
+    .preview-content {
+        padding: 0;
+    }
+
+    .preview-page {
+        box-shadow: none;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .preview-toolbar {
+        flex-direction: column;
+        height: auto;
+        padding: 8px;
+    }
+
+    .preview-toolbar-left,
+    .preview-toolbar-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .preview-content {
+        padding: 16px;
+    }
+
+    .preview-page {
+        padding: 20px;
+    }
+
+    .signatures-area {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Animations */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Document Status Indicators */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-draft {
+    background: #FFF4E5;
+    color: #7A4F01;
+}
+
+.status-pending {
+    background: #E3FCEF;
+    color: #054F31;
+}
+
+.status-signed {
+    background: #DFE7FF;
+    color: #002175;
+}
+
+/* Watermark for Draft Documents */
+.preview-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 80px;
+    color: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Page Numbers */
+.page-number {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 0.75rem;
+    color: var(--preview-meta);
+}
+
+/* Highlight Changes */
+.text-changed {
+    background: #FFF9C4;
+    padding: 0 2px;
+}
+
+.text-added {
+    background: #E3FCEF;
+    padding: 0 2px;
+}
+
+.text-removed {
+    background: #FFE9E8;
+    text-decoration: line-through;
+    padding: 0 2px;
+}

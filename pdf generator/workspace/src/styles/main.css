@@ -1,0 +1,322 @@
+/* === DESIGN SYSTEM === */
+:root {
+    /* Brand Colors */
+    --brand-primary: #0052CC;    /* Bleu professionnel */
+    --brand-secondary: #253858;  /* Bleu foncé */
+    --brand-accent: #36B37E;     /* Vert pour les succès */
+    
+    /* Neutral Colors */
+    --neutral-900: #091E42;      /* Texte principal */
+    --neutral-800: #172B4D;      /* Texte secondaire */
+    --neutral-700: #253858;      /* Texte tertiaire */
+    --neutral-200: #DFE1E6;      /* Bordures */
+    --neutral-100: #F4F5F7;      /* Fond secondaire */
+    --neutral-50: #FAFBFC;       /* Fond principal */
+    --white: #FFFFFF;
+
+    /* Functional Colors */
+    --error: #DE350B;
+    --warning: #FF991F;
+    --info: #0065FF;
+    --success: #36B37E;
+
+    /* Typography */
+    --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    --font-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+/* === RESET MODERNE === */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: var(--font-base);
+    line-height: 1.5;
+    color: var(--neutral-900);
+    background-color: var(--neutral-50);
+    min-height: 100vh;
+}
+
+/* === LAYOUT === */
+.app-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+.main-sidebar {
+    background-color: var(--white);
+    border-right: 1px solid var(--neutral-200);
+    padding: 24px;
+    position: fixed;
+    height: 100vh;
+    width: 280px;
+    overflow-y: auto;
+}
+
+.main-content {
+    margin-left: 280px;
+    padding: 32px;
+    background-color: var(--neutral-50);
+}
+
+/* === NAVIGATION === */
+.top-navigation {
+    height: 64px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--neutral-200);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.nav-brand img {
+    height: 32px;
+    width: auto;
+}
+
+.nav-brand span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--neutral-900);
+}
+
+/* === COMPOSANTS === */
+.card {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1), 0 1px 2px rgba(16, 24, 40, 0.06);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--neutral-900);
+    margin-bottom: 24px;
+}
+
+/* Boutons modernes et professionnels */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--brand-primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: #0747A6;
+}
+
+.btn-secondary {
+    background-color: var(--white);
+    border: 1px solid var(--neutral-200);
+    color: var(--neutral-800);
+}
+
+.btn-secondary:hover {
+    background-color: var(--neutral-50);
+    border-color: var(--neutral-300);
+}
+
+/* Tables professionnelles */
+.table-container {
+    overflow-x: auto;
+    margin: 24px 0;
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table th {
+    background-color: var(--neutral-50);
+    color: var(--neutral-700);
+    font-weight: 500;
+    text-align: left;
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--neutral-200);
+}
+
+.table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--neutral-200);
+    color: var(--neutral-800);
+}
+
+/* Status badges */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.badge-success {
+    background-color: #E3FCEF;
+    color: #054F31;
+}
+
+.badge-warning {
+    background-color: #FFF4E5;
+    color: #7A4F01;
+}
+
+.badge-error {
+    background-color: #FFE9E8;
+    color: #81231D;
+}
+
+/* Form elements */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--neutral-800);
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--neutral-200);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: var(--neutral-900);
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 4px rgba(0, 82, 204, 0.1);
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Dashboard Stats */
+.stat-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, 0.1);
+}
+
+.stat-title {
+    color: var(--neutral-700);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.stat-value {
+    color: var(--neutral-900);
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .main-sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .top-navigation {
+        padding: 0 16px;
+    }
+
+    .main-content {
+        padding: 16px;
+    }
+}
+
+/* Utility Classes */
+.d-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-4 {
+    gap: 16px;
+}
+
+.mb-6 {
+    margin-bottom: 24px;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}
