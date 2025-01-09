@@ -6,57 +6,62 @@
     <title>PDF Generator</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/templates.css">
+    <link rel="stylesheet" href="styles/modal.css">
 </head>
 <body>
     <div id="app">
         <header class="header">
             <h1>Générateur de PDF</h1>
-        </header>
-        <main class="main">
-            <div class="controls">
-                <div class="template-selector">
-                    <label for="templateSelect">Choisir un template :</label>
-                    <select id="templateSelect" class="select">
-                        <option value="default">Template par défaut</option>
-                        <option value="business">Template professionnel</option>
-                        <option value="creative">Template créatif</option>
-                    </select>
-                </div>
-                
-                <div class="customization-panel">
-                    <h3>Personnalisation</h3>
-                    <div class="form-group">
-                        <label for="headerColor">Couleur d'en-tête :</label>
-                        <input type="color" id="headerColor" value="#2196F3">
-                    </div>
-                    <div class="form-group">
-                        <label for="fontSize">Taille du texte :</label>
-                        <input type="range" id="fontSize" min="12" max="24" value="16">
-                    </div>
-                </div>
-
-                <button id="generatePdf" class="btn primary">
-                    <svg class="icon">
-                        <use xlink:href="assets/sprites/sprite.svg#icon1"/>
-                    </svg>
-                    Générer PDF
+            <nav class="main-nav">
+                <button id="saveTemplateBtn" class="btn secondary">
+                    <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#icon1"/></svg>
+                    Sauvegarder le modèle
                 </button>
-            </div>
+                <button id="loadTemplateBtn" class="btn secondary">
+                    <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#icon1"/></svg>
+                    Charger un modèle
+                </button>
+            </nav>
+        </header>
 
-            <div class="preview-area">
-                <div id="pdfPreview" class="pdf-content">
-                    <div class="template-header">
-                        <h2 contenteditable="true">Titre du document</h2>
-                        <p contenteditable="true">Sous-titre éditable</p>
+        <!-- Contenu existant -->
+        <main class="main">
+            <!-- ... (contenu précédent) ... -->
+        </main>
+
+        <!-- Modal de sauvegarde -->
+        <div id="saveModal" class="modal">
+            <div class="modal-content">
+                <h2>Sauvegarder le modèle</h2>
+                <form id="saveTemplateForm">
+                    <div class="form-group">
+                        <label for="templateName">Nom du modèle</label>
+                        <input type="text" id="templateName" required>
                     </div>
-                    <div class="template-body">
-                        <div contenteditable="true" class="editable-content">
-                            <p>Cliquez pour éditer le contenu...</p>
-                        </div>
+                    <div class="form-group">
+                        <label for="templateDescription">Description</label>
+                        <textarea id="templateDescription"></textarea>
                     </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn secondary modal-close">Annuler</button>
+                        <button type="submit" class="btn primary">Sauvegarder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de chargement -->
+        <div id="loadModal" class="modal">
+            <div class="modal-content">
+                <h2>Charger un modèle</h2>
+                <div class="templates-list" id="savedTemplatesList">
+                    <!-- Les templates sauvegardés seront injectés ici -->
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn secondary modal-close">Fermer</button>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
     <script src="js/main.js" type="module"></script>
 </body>
