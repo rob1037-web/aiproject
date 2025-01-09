@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Generator</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <h1>Générateur de PDF</h1>
+        </header>
+        <main class="main">
+            <div class="controls">
+                <button id="generatePdf" class="btn">
+                    <svg class="icon">
+                        <use xlink:href="assets/sprites/sprite.svg#icon1"/>
+                    </svg>
+                    Générer PDF
+                </button>
+            </div>
+            <div class="preview-area">
+                <div id="pdfPreview"></div>
+            </div>
+        </main>
+    </div>
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>

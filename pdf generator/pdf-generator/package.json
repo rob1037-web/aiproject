@@ -1,0 +1,14 @@
+{
+  "name": "pdf-generator",
+  "version": "1.0.0",
+  "description": "PDF Generator Project",
+  "main": "src/js/main.js",
+  "scripts": {
+    "generate-sprites": "node scripts/generate-sprites.js"
+  },
+  "devDependencies": {
+    "svg-sprite": "^2.0.2",
+    "svgo": "^3.0.2",
+    "glob": "^10.3.10"
+  }
+}
