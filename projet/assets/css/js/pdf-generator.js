@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const totalHT = document.getElementById('totalHT').textContent;
 
         prestations.push([
-            surface + ' m²',
             services,
+            surface + ' m²',
             frequence,
             formatMontant(prixUnitaire) + '/m²',
             totalHT
@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         };
     }
+
     function genererPDF() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
@@ -139,26 +140,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (logo && logo.src) {
             const pageWidth = doc.internal.pageSize.getWidth();
             
-            // Définition des dimensions maximales et minimales
             const maxLogoWidth = 50;
             const maxLogoHeight = 20;
             const minLogoWidth = 30;
             const minLogoHeight = 15;
 
-            // Calcul du ratio d'aspect original
             const originalRatio = logo.naturalHeight / logo.naturalWidth;
 
-            // Calcul initial des dimensions
             let logoWidth = Math.min(maxLogoWidth, logo.naturalWidth);
             let logoHeight = logoWidth * originalRatio;
 
-            // Ajustements pour respecter les limites tout en préservant le ratio
             if (logoHeight > maxLogoHeight) {
                 logoHeight = maxLogoHeight;
                 logoWidth = logoHeight / originalRatio;
             }
 
-            // Vérification des dimensions minimales
             if (logoWidth < minLogoWidth) {
                 logoWidth = minLogoWidth;
                 logoHeight = logoWidth * originalRatio;
@@ -169,7 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 logoWidth = logoHeight / originalRatio;
             }
 
-            // Centrage du logo
             const centerX = (pageWidth - logoWidth) / 2;
             
             try {
@@ -181,203 +176,132 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // En-tête du devis
-        const devisNumber = generateDevisNumber();
-        const emissionDate = new Date().toLocaleDateString('fr-FR', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-
-        // Bande bleue du titre
-        doc.setFillColor(...pdfConfig.primaryColor);
-        doc.rect(pdfConfig.marginLeft, currentY, doc.internal.pageSize.getWidth() - pdfConfig.marginLeft - pdfConfig.marginRight, 12, 'F');
-        doc.setTextColor(255, 255, 255);
+        // En-tête du document
         doc.setFontSize(pdfConfig.headerFontSize);
-        doc.text("DEVIS", doc.internal.pageSize.getWidth() / 2, currentY + 8, { align: 'center' });
-        currentY += 15;
+        doc.setTextColor(...pdfConfig.primaryColor);
+        doc.text("DEVIS", doc.internal.pageSize.getWidth() / 2, currentY, { align: 'center' });
+        currentY += pdfConfig.lineHeight;
 
         // Numéro de devis et date
-        doc.setFillColor(...pdfConfig.backgroundColor);
-        doc.rect(pdfConfig.marginLeft, currentY - 5, 180, 10, 'F');
-        doc.setTextColor(...pdfConfig.secondaryColor);
         doc.setFontSize(pdfConfig.fontSize);
-        doc.text(`N° ${devisNumber} - Émis le ${emissionDate}`, pdfConfig.marginLeft + 5, currentY + 2);
-        currentY += 12;
+        doc.setTextColor(...pdfConfig.secondaryColor);
+        const devisNumber = generateDevisNumber();
+        const currentDate = new Date().toLocaleDateString('fr-FR');
+        
+        doc.text(`Devis N° : ${devisNumber}`, pdfConfig.marginLeft, currentY);
+        doc.text(`Date : ${currentDate}`, doc.internal.pageSize.getWidth() - pdfConfig.marginRight, currentY, { align: 'right' });
+        currentY += pdfConfig.sectionSpacing * 2;
 
-        // Informations entreprise et client
-        const columnWidth = (doc.internal.pageSize.getWidth() - pdfConfig.marginLeft - pdfConfig.marginRight - 5) / 2;
-
-        function createInfoBox(title, content, x, y) {
-            doc.setDrawColor(...pdfConfig.borderColor);
-            doc.setFillColor(...pdfConfig.backgroundColor);
-            doc.roundedRect(x, y, columnWidth, 35, 2, 2, 'FD');
-            
-            doc.setFillColor(...pdfConfig.primaryColor);
-            doc.rect(x, y, columnWidth, 8, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(pdfConfig.subHeaderFontSize);
-            doc.text(title, x + (columnWidth/2), y + 6, { align: 'center' });
-
-            doc.setTextColor(...pdfConfig.secondaryColor);
-            doc.setFontSize(pdfConfig.fontSize);
-            content.forEach((line, index) => {
-                if (line) {
-                    doc.text(line, x + 5, y + 16 + (index * 6));
-                }
-            });
-        }
-
-        const entrepriseContent = [
-            document.getElementById('entrepriseNom').value || '',
-            'SIRET: ' + (document.getElementById('siret').value || ''),
-            document.getElementById('adresse').value || '',
-            'Contact: ' + (document.getElementById('contact').value || '')
+        // Informations client et prestataire avec les nouveaux IDs
+        const clientInfo = [
+            ['CLIENT', 'PRESTATAIRE'],
+            [document.getElementById('clientName').value, document.getElementById('entrepriseName').value],
+            [document.getElementById('clientAddress').value, document.getElementById('entrepriseAddress').value],
+            [document.getElementById('clientContact').value, document.getElementById('contactReferent').value]
         ];
 
-        const clientContent = [
-            document.getElementById('clientNom').value || '',
-            'Email: ' + (document.getElementById('clientEmail').value || ''),
-            'Tél: ' + (document.getElementById('clientTel').value || ''),
-            document.getElementById('clientAdresse').value || ''
-        ];
+        doc.autoTable({
+            startY: currentY,
+            head: [clientInfo[0]],
+            body: clientInfo.slice(1),
+            theme: 'plain',
+            styles: pdfConfig.tableStyles,
+            columnStyles: {
+                0: { cellWidth: 92 },
+                1: { cellWidth: 92 }
+            },
+            margin: { left: pdfConfig.marginLeft, right: pdfConfig.marginRight }
+        });
 
-        createInfoBox("NOTRE ENTREPRISE", entrepriseContent, pdfConfig.marginLeft, currentY);
-        createInfoBox("CLIENT", clientContent, pdfConfig.marginLeft + columnWidth + 5, currentY);
-        currentY += 40;
+        currentY = doc.lastAutoTable.finalY + pdfConfig.sectionSpacing;
 
-        // Tableau des prestations détaillé
-        doc.setFillColor(...pdfConfig.primaryColor);
-        doc.rect(pdfConfig.marginLeft, currentY, doc.internal.pageSize.getWidth() - pdfConfig.marginLeft - pdfConfig.marginRight, 8, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(pdfConfig.subHeaderFontSize);
-        doc.text("DÉTAIL DES PRESTATIONS", pdfConfig.marginLeft + 5, currentY + 6);
-        currentY += 10;
-
+        // Table des prestations
         const prestationsData = formatPrestationsData();
         doc.autoTable({
-            head: [['Surface', 'Services', 'Fréquence', 'Prix unitaire', 'Total HT']],
+            startY: currentY,
+            head: [['Services', 'Surface', 'Fréquence', 'Prix unitaire', 'Total HT']],
             body: prestationsData,
-            startY: currentY,
-            margin: { left: pdfConfig.marginLeft, right: pdfConfig.marginRight },
+            theme: 'striped',
             styles: pdfConfig.tableStyles,
+            columnStyles: {
+                0: { halign: 'left', cellWidth: 80 },
+                1: { halign: 'left', cellWidth: 25 },
+                2: { halign: 'left', cellWidth: 25 },
+                3: { halign: 'right', cellWidth: 30 },
+                4: { halign: 'right', cellWidth: 25 }
+            },
             headStyles: {
-                fillColor: [...pdfConfig.backgroundColor],
-                textColor: [...pdfConfig.secondaryColor],
-                fontStyle: 'bold',
-                fontSize: pdfConfig.fontSize
+                fillColor: [...pdfConfig.primaryColor],
+                textColor: [255, 255, 255]
             },
-            columnStyles: {
-                0: { halign: 'left' },
-                1: { halign: 'left' },
-                2: { halign: 'left' },
-                3: { halign: 'right' },
-                4: { halign: 'right' }
-            },
-            theme: 'grid'
+            margin: { left: pdfConfig.marginLeft, right: pdfConfig.marginRight }
         });
-        currentY = doc.lastAutoTable.finalY + 10;
 
-        // Tarification et conditions
-        const tarificationData = formatTarificationData();
+        currentY = doc.lastAutoTable.finalY + pdfConfig.sectionSpacing;
+
+        // Tarification
+        const tarification = formatTarificationData();
         
-        doc.setFillColor(...pdfConfig.primaryColor);
-        doc.rect(pdfConfig.marginLeft, currentY, doc.internal.pageSize.getWidth() - pdfConfig.marginLeft - pdfConfig.marginRight, 8, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(pdfConfig.subHeaderFontSize);
-        doc.text("TARIFICATION ET CONDITIONS DE PAIEMENT", pdfConfig.marginLeft + 5, currentY + 6);
-        currentY += 10;
-
-        // Tableaux montants et conditions
+        // Table des montants
         doc.autoTable({
-            body: tarificationData.montants,
             startY: currentY,
-            margin: { left: doc.internal.pageSize.getWidth() / 2, right: pdfConfig.marginRight },
-            styles: {...pdfConfig.priceTableStyles, fontSize: pdfConfig.fontSize},
-            theme: 'grid',
+            body: tarification.montants,
+            theme: 'plain',
+            styles: pdfConfig.priceTableStyles,
             columnStyles: {
-                0: { fontStyle: 'bold' },
-                1: { halign: 'right' }
-            }
+                0: { cellWidth: 130 },
+                1: { cellWidth: 50 }
+            },
+            margin: { left: pdfConfig.marginLeft, right: pdfConfig.marginRight }
         });
 
-        doc.autoTable({
-            body: tarificationData.conditions,
-            startY: currentY,
-            margin: { left: pdfConfig.marginLeft, right: doc.internal.pageSize.getWidth() / 2 + 5 },
-            styles: {...pdfConfig.tableStyles, fontSize: pdfConfig.fontSize},
-            theme: 'grid',
-            columnStyles: {
-                0: { fontStyle: 'bold' }
-            }
-        });
-        currentY = Math.max(doc.lastAutoTable.finalY, currentY) + 10;
+        currentY = doc.lastAutoTable.finalY + pdfConfig.sectionSpacing;
 
-        // Zone de validation
+        // Conditions de paiement
+        doc.autoTable({
+            startY: currentY,
+            body: tarification.conditions,
+            theme: 'striped',
+            styles: pdfConfig.tableStyles,
+            columnStyles: {
+                0: { cellWidth: 60 },
+                1: { cellWidth: 120 }
+            },
+            margin: { left: pdfConfig.marginLeft, right: pdfConfig.marginRight }
+        });
+
+        currentY = doc.lastAutoTable.finalY + pdfConfig.sectionSpacing * 2;
+
+        // Zone de signature
+        const signatureWidth = 70;
+        const signatureHeight = 30;
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const signatureX = pageWidth - pdfConfig.marginRight - signatureWidth;
+
         doc.setFillColor(...pdfConfig.signatureBackground);
-        doc.roundedRect(pdfConfig.marginLeft, currentY, doc.internal.pageSize.getWidth() - pdfConfig.marginLeft - pdfConfig.marginRight, 48, 2, 2, 'F');
+        doc.rect(signatureX, currentY, signatureWidth, signatureHeight, 'F');
         
-        doc.setFillColor(...pdfConfig.primaryColor);
-        doc.rect(pdfConfig.marginLeft, currentY, doc.internal.pageSize.getWidth() - pdfConfig.marginLeft - pdfConfig.marginRight, 8, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(pdfConfig.subHeaderFontSize);
-        doc.text("VALIDATION DU DEVIS", pdfConfig.marginLeft + 5, currentY + 6);
-        currentY += 12;
+        doc.setDrawColor(...pdfConfig.borderColor);
+        doc.rect(signatureX, currentY, signatureWidth, signatureHeight);
 
-       // Zones de signature
-       const signatureWidth = 70;
-       const approuveWidth = 70;
-       const signatureHeight = 28;
-       const spacing = (doc.internal.pageSize.getWidth() - pdfConfig.marginLeft - pdfConfig.marginRight - signatureWidth - approuveWidth) / 3;
-        
-       // Ajout d'un espace supplémentaire
-        currentY += 10; // Ajoutez cette ligne pour descendre les zones
+        doc.setFontSize(pdfConfig.fontSize);
+        doc.setTextColor(...pdfConfig.secondaryColor);
+        doc.text("Signature :", signatureX, currentY - 2);
 
-       // Zone de signature (garde le fond blanc)
-       doc.setFillColor(...pdfConfig.signatureBackground);
-       doc.setDrawColor(...pdfConfig.borderColor);
-       doc.roundedRect(pdfConfig.marginLeft + spacing, currentY, signatureWidth, signatureHeight, 1, 1, 'FD');
-       doc.setTextColor(...pdfConfig.secondaryColor);
-       doc.setFontSize(pdfConfig.fontSize);
-       doc.text("Signature", pdfConfig.marginLeft + spacing, currentY - 2);
-
-       const signaturePad = document.getElementById('signaturePad');
-       if (signaturePad) {
-           const signatureImage = signaturePad.toDataURL('image/png');
-           doc.addImage(signatureImage, 'PNG', pdfConfig.marginLeft + spacing + 5, currentY + 2, 60, 20);
-       }
-
-       // Zone "Lu et approuvé" (sans fond, juste le contour)
-       doc.setDrawColor(...pdfConfig.borderColor);
-       doc.roundedRect(pdfConfig.marginLeft + signatureWidth + spacing * 2, currentY, approuveWidth, signatureHeight, 1, 1, 'S'); // Changé 'FD' en 'S'
-       doc.text("Lu et approuvé", pdfConfig.marginLeft + signatureWidth + spacing * 2, currentY - 2);
-       
-       const signatureText = document.getElementById('signatureText').value;
-       if (signatureText) {
-           doc.text(signatureText, pdfConfig.marginLeft + signatureWidth + spacing * 2 + 5, currentY + 15);
-       }
-
-        // Durée de validité
-        currentY += signatureHeight + 10;
-        const dureeValidite = document.getElementById('dureeValidite').value;
-        if (dureeValidite) {
-            doc.setFontSize(pdfConfig.fontSize);
-            doc.setTextColor(...pdfConfig.secondaryColor);
-            doc.text(`Durée de validité : ${dureeValidite}`, pdfConfig.marginLeft, currentY);
-            currentY += 8;
-        }
+        currentY += signatureHeight + pdfConfig.sectionSpacing;
 
         // Mentions légales
-        const legalText = document.querySelector('.legal').textContent;
         doc.setFontSize(pdfConfig.mentionsLegales.fontSize);
         doc.setTextColor(...pdfConfig.mentionsLegales.color);
-        const splitText = doc.splitTextToSize(legalText, doc.internal.pageSize.getWidth() - pdfConfig.marginLeft - pdfConfig.marginRight);
-        doc.text(splitText, pdfConfig.marginLeft, doc.internal.pageSize.getHeight() - 15);
+        const mentionsLegales = "En cas de retard de paiement, une pénalité de 3 fois le taux d'intérêt légal sera appliquée.";
+        doc.text(mentionsLegales, pdfConfig.marginLeft, doc.internal.pageSize.getHeight() - pdfConfig.marginBottom);
 
         // Sauvegarde du PDF
-        doc.save(`devis-${devisNumber}.pdf`);
+        doc.save(`Devis_${devisNumber}.pdf`);
     }
 
-    // Écouteur d'événement pour le bouton de génération
-    generatePDFButton.addEventListener('click', genererPDF);
+    // Event listener pour la génération du PDF
+    if (generatePDFButton) {
+        generatePDFButton.addEventListener('click', genererPDF);
+    }
 });
