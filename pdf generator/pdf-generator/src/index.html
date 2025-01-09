@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Generator</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/templates.css">
 </head>
 <body>
     <div id="app">
@@ -13,15 +14,47 @@
         </header>
         <main class="main">
             <div class="controls">
-                <button id="generatePdf" class="btn">
+                <div class="template-selector">
+                    <label for="templateSelect">Choisir un template :</label>
+                    <select id="templateSelect" class="select">
+                        <option value="default">Template par défaut</option>
+                        <option value="business">Template professionnel</option>
+                        <option value="creative">Template créatif</option>
+                    </select>
+                </div>
+                
+                <div class="customization-panel">
+                    <h3>Personnalisation</h3>
+                    <div class="form-group">
+                        <label for="headerColor">Couleur d'en-tête :</label>
+                        <input type="color" id="headerColor" value="#2196F3">
+                    </div>
+                    <div class="form-group">
+                        <label for="fontSize">Taille du texte :</label>
+                        <input type="range" id="fontSize" min="12" max="24" value="16">
+                    </div>
+                </div>
+
+                <button id="generatePdf" class="btn primary">
                     <svg class="icon">
                         <use xlink:href="assets/sprites/sprite.svg#icon1"/>
                     </svg>
                     Générer PDF
                 </button>
             </div>
+
             <div class="preview-area">
-                <div id="pdfPreview"></div>
+                <div id="pdfPreview" class="pdf-content">
+                    <div class="template-header">
+                        <h2 contenteditable="true">Titre du document</h2>
+                        <p contenteditable="true">Sous-titre éditable</p>
+                    </div>
+                    <div class="template-body">
+                        <div contenteditable="true" class="editable-content">
+                            <p>Cliquez pour éditer le contenu...</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
