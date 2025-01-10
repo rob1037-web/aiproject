@@ -6,7 +6,9 @@
   "scripts": {
     "generate-sprites": "node scripts/generate-sprites.js",
     "css:build": "postcss src/styles/*.css --dir dist/css --ext .min.css --map",
-    "css:watch": "postcss src/styles/*.css --dir dist/css --ext .min.css --watch"
+    "css:watch": "postcss src/styles/*.css --dir dist/css --ext .min.css --watch",
+    "dev": "live-server",
+    "start": "npm-run-all --parallel dev css:watch"
   },
   "devDependencies": {
     "svg-sprite": "^2.0.2",
@@ -19,6 +21,8 @@
     "postcss-import": "^15.1.0",
     "postcss-preset-env": "^9.3.0",
     "postcss-combine-media-query": "^1.0.1",
-    "postcss-custom-properties": "^13.3.2"
+    "postcss-custom-properties": "^13.3.2",
+    "live-server": "^1.2.2",
+    "npm-run-all": "^4.1.5"
   }
 }

@@ -1,0 +1,1004 @@
+.
+├── fonts
+│   ├── open-sans
+│   └── roboto
+├── pdf-generator
+│   ├── config
+│   ├── dist
+│   │   └── css
+│   ├── node_modules
+│   │   ├── @colors
+│   │   │   └── colors
+│   │   │       ├── examples
+│   │   │       ├── lib
+│   │   │       │   ├── custom
+│   │   │       │   ├── maps
+│   │   │       │   └── system
+│   │   │       └── themes
+│   │   ├── @csstools
+│   │   │   ├── cascade-layer-name-parser
+│   │   │   │   └── dist
+│   │   │   ├── color-helpers
+│   │   │   │   └── dist
+│   │   │   ├── css-calc
+│   │   │   │   └── dist
+│   │   │   ├── css-color-parser
+│   │   │   │   └── dist
+│   │   │   ├── css-parser-algorithms
+│   │   │   │   └── dist
+│   │   │   ├── css-tokenizer
+│   │   │   │   └── dist
+│   │   │   ├── media-query-list-parser
+│   │   │   │   └── dist
+│   │   │   ├── postcss-cascade-layers
+│   │   │   │   └── dist
+│   │   │   ├── postcss-color-function
+│   │   │   │   └── dist
+│   │   │   ├── postcss-color-mix-function
+│   │   │   │   └── dist
+│   │   │   ├── postcss-content-alt-text
+│   │   │   │   └── dist
+│   │   │   ├── postcss-exponential-functions
+│   │   │   │   └── dist
+│   │   │   ├── postcss-font-format-keywords
+│   │   │   │   └── dist
+│   │   │   ├── postcss-gamut-mapping
+│   │   │   │   └── dist
+│   │   │   ├── postcss-gradients-interpolation-method
+│   │   │   │   └── dist
+│   │   │   ├── postcss-hwb-function
+│   │   │   │   └── dist
+│   │   │   ├── postcss-ic-unit
+│   │   │   │   └── dist
+│   │   │   ├── postcss-initial
+│   │   │   │   └── dist
+│   │   │   ├── postcss-is-pseudo-class
+│   │   │   │   └── dist
+│   │   │   ├── postcss-light-dark-function
+│   │   │   │   └── dist
+│   │   │   ├── postcss-logical-float-and-clear
+│   │   │   │   └── dist
+│   │   │   ├── postcss-logical-overflow
+│   │   │   │   └── dist
+│   │   │   ├── postcss-logical-overscroll-behavior
+│   │   │   │   └── dist
+│   │   │   ├── postcss-logical-resize
+│   │   │   │   └── dist
+│   │   │   ├── postcss-logical-viewport-units
+│   │   │   │   └── dist
+│   │   │   ├── postcss-media-minmax
+│   │   │   │   └── dist
+│   │   │   ├── postcss-media-queries-aspect-ratio-number-values
+│   │   │   │   └── dist
+│   │   │   ├── postcss-nested-calc
+│   │   │   │   └── dist
+│   │   │   ├── postcss-normalize-display-values
+│   │   │   │   └── dist
+│   │   │   ├── postcss-oklab-function
+│   │   │   │   └── dist
+│   │   │   ├── postcss-progressive-custom-properties
+│   │   │   │   └── dist
+│   │   │   ├── postcss-relative-color-syntax
+│   │   │   │   └── dist
+│   │   │   ├── postcss-scope-pseudo-class
+│   │   │   │   └── dist
+│   │   │   ├── postcss-stepped-value-functions
+│   │   │   │   └── dist
+│   │   │   ├── postcss-text-decoration-shorthand
+│   │   │   │   └── dist
+│   │   │   ├── postcss-trigonometric-functions
+│   │   │   │   └── dist
+│   │   │   ├── postcss-unset-value
+│   │   │   │   └── dist
+│   │   │   ├── selector-resolve-nested
+│   │   │   │   └── dist
+│   │   │   ├── selector-specificity
+│   │   │   │   └── dist
+│   │   │   └── utilities
+│   │   │       └── dist
+│   │   ├── @dabh
+│   │   │   └── diagnostics
+│   │   │       ├── adapters
+│   │   │       ├── browser
+│   │   │       ├── logger
+│   │   │       ├── modifiers
+│   │   │       └── node
+│   │   ├── @isaacs
+│   │   │   └── cliui
+│   │   │       └── build
+│   │   │           └── lib
+│   │   ├── @nodelib
+│   │   │   ├── fs.scandir
+│   │   │   │   └── out
+│   │   │   │       ├── adapters
+│   │   │   │       ├── providers
+│   │   │   │       ├── types
+│   │   │   │       └── utils
+│   │   │   ├── fs.stat
+│   │   │   │   └── out
+│   │   │   │       ├── adapters
+│   │   │   │       ├── providers
+│   │   │   │       └── types
+│   │   │   └── fs.walk
+│   │   │       └── out
+│   │   │           ├── providers
+│   │   │           ├── readers
+│   │   │           └── types
+│   │   ├── @pkgjs
+│   │   │   └── parseargs
+│   │   │       ├── examples
+│   │   │       └── internal
+│   │   ├── @resvg
+│   │   │   ├── resvg-js
+│   │   │   ├── resvg-js-linux-x64-gnu
+│   │   │   └── resvg-js-linux-x64-musl
+│   │   ├── @trysound
+│   │   │   └── sax
+│   │   │       └── lib
+│   │   ├── @types
+│   │   │   └── triple-beam
+│   │   ├── @xmldom
+│   │   │   └── xmldom
+│   │   │       └── lib
+│   │   ├── ansi-regex
+│   │   ├── ansi-styles
+│   │   ├── anymatch
+│   │   ├── argparse
+│   │   │   └── lib
+│   │   ├── async
+│   │   │   ├── dist
+│   │   │   └── internal
+│   │   ├── autoprefixer
+│   │   │   ├── bin
+│   │   │   ├── data
+│   │   │   └── lib
+│   │   │       └── hacks
+│   │   ├── balanced-match
+│   │   ├── binary-extensions
+│   │   ├── boolbase
+│   │   ├── brace-expansion
+│   │   ├── braces
+│   │   │   └── lib
+│   │   ├── browserslist
+│   │   ├── caniuse-api
+│   │   │   └── dist
+│   │   ├── caniuse-lite
+│   │   │   ├── data
+│   │   │   │   ├── features
+│   │   │   │   └── regions
+│   │   │   └── dist
+│   │   │       ├── lib
+│   │   │       └── unpacker
+│   │   ├── chokidar
+│   │   │   ├── lib
+│   │   │   └── types
+│   │   ├── cliui
+│   │   │   ├── build
+│   │   │   │   └── lib
+│   │   │   └── node_modules
+│   │   │       ├── ansi-regex
+│   │   │       ├── ansi-styles
+│   │   │       ├── color-convert
+│   │   │       ├── color-name
+│   │   │       ├── emoji-regex
+│   │   │       │   └── es2015
+│   │   │       ├── string-width
+│   │   │       ├── strip-ansi
+│   │   │       └── wrap-ansi
+│   │   ├── clone
+│   │   ├── clone-buffer
+│   │   ├── clone-stats
+│   │   ├── cloneable-readable
+│   │   ├── color
+│   │   ├── color-convert
+│   │   ├── color-name
+│   │   ├── color-string
+│   │   ├── colord
+│   │   │   └── plugins
+│   │   ├── colorspace
+│   │   ├── commander
+│   │   │   └── typings
+│   │   ├── concat-map
+│   │   │   ├── example
+│   │   │   └── test
+│   │   ├── core-util-is
+│   │   │   └── lib
+│   │   ├── cross-spawn
+│   │   │   └── lib
+│   │   │       └── util
+│   │   ├── css-blank-pseudo
+│   │   │   └── dist
+│   │   ├── css-declaration-sorter
+│   │   │   ├── dist
+│   │   │   └── src
+│   │   │       ├── core
+│   │   │       └── orders
+│   │   ├── css-has-pseudo
+│   │   │   └── dist
+│   │   ├── css-prefers-color-scheme
+│   │   │   └── dist
+│   │   ├── css-select
+│   │   │   └── lib
+│   │   │       ├── esm
+│   │   │       │   └── pseudo-selectors
+│   │   │       └── pseudo-selectors
+│   │   ├── css-selector-parser
+│   │   │   └── lib
+│   │   ├── css-tree
+│   │   │   ├── data
+│   │   │   ├── dist
+│   │   │   └── lib
+│   │   │       ├── common
+│   │   │       ├── convertor
+│   │   │       ├── definition-syntax
+│   │   │       ├── generator
+│   │   │       ├── lexer
+│   │   │       ├── parser
+│   │   │       ├── syntax
+│   │   │       │   ├── atrule
+│   │   │       │   ├── config
+│   │   │       │   ├── function
+│   │   │       │   ├── node
+│   │   │       │   ├── pseudo
+│   │   │       │   │   └── common
+│   │   │       │   └── scope
+│   │   │       ├── tokenizer
+│   │   │       ├── utils
+│   │   │       └── walker
+│   │   ├── css-what
+│   │   │   └── lib
+│   │   │       ├── commonjs
+│   │   │       └── es
+│   │   ├── cssdb
+│   │   ├── cssesc
+│   │   │   ├── bin
+│   │   │   └── man
+│   │   ├── cssnano
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── cssnano-preset-default
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── cssnano-utils
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── csso
+│   │   │   ├── dist
+│   │   │   └── lib
+│   │   │       ├── clean
+│   │   │       ├── replace
+│   │   │       │   ├── atrule
+│   │   │       │   └── property
+│   │   │       └── restructure
+│   │   │           └── prepare
+│   │   ├── cssom
+│   │   │   └── lib
+│   │   ├── dependency-graph
+│   │   │   ├── lib
+│   │   │   └── specs
+│   │   ├── dir-glob
+│   │   ├── dom-serializer
+│   │   │   └── lib
+│   │   │       └── esm
+│   │   ├── domelementtype
+│   │   │   └── lib
+│   │   │       └── esm
+│   │   ├── domhandler
+│   │   │   └── lib
+│   │   │       └── esm
+│   │   ├── domutils
+│   │   │   └── lib
+│   │   │       └── esm
+│   │   ├── eastasianwidth
+│   │   ├── electron-to-chromium
+│   │   ├── emoji-regex
+│   │   │   └── es2015
+│   │   ├── enabled
+│   │   ├── entities
+│   │   │   └── lib
+│   │   │       ├── esm
+│   │   │       │   └── generated
+│   │   │       └── generated
+│   │   ├── escalade
+│   │   │   ├── dist
+│   │   │   └── sync
+│   │   ├── fast-glob
+│   │   │   └── out
+│   │   │       ├── managers
+│   │   │       ├── providers
+│   │   │       │   ├── filters
+│   │   │       │   ├── matchers
+│   │   │       │   └── transformers
+│   │   │       ├── readers
+│   │   │       ├── types
+│   │   │       └── utils
+│   │   ├── fastq
+│   │   │   └── test
+│   │   ├── fecha
+│   │   │   ├── dist
+│   │   │   ├── lib
+│   │   │   └── src
+│   │   ├── fill-range
+│   │   ├── fn.name
+│   │   ├── foreground-child
+│   │   │   └── dist
+│   │   │       ├── commonjs
+│   │   │       └── esm
+│   │   ├── fraction.js
+│   │   ├── fs-extra
+│   │   │   └── lib
+│   │   │       ├── copy
+│   │   │       ├── empty
+│   │   │       ├── ensure
+│   │   │       ├── fs
+│   │   │       ├── json
+│   │   │       ├── mkdirs
+│   │   │       ├── move
+│   │   │       ├── output-file
+│   │   │       ├── path-exists
+│   │   │       ├── remove
+│   │   │       └── util
+│   │   ├── fs.realpath
+│   │   ├── function-bind
+│   │   │   └── test
+│   │   ├── get-caller-file
+│   │   ├── get-stdin
+│   │   ├── glob
+│   │   │   └── dist
+│   │   │       ├── commonjs
+│   │   │       └── esm
+│   │   ├── glob-parent
+│   │   ├── globby
+│   │   │   └── node_modules
+│   │   │       └── slash
+│   │   ├── graceful-fs
+│   │   ├── hasown
+│   │   ├── ignore
+│   │   ├── inflight
+│   │   ├── inherits
+│   │   ├── is-arrayish
+│   │   ├── is-binary-path
+│   │   ├── is-core-module
+│   │   │   └── test
+│   │   ├── is-extglob
+│   │   ├── is-fullwidth-code-point
+│   │   ├── is-glob
+│   │   ├── is-number
+│   │   ├── is-stream
+│   │   ├── isarray
+│   │   ├── isexe
+│   │   │   └── test
+│   │   ├── jackspeak
+│   │   │   └── dist
+│   │   │       ├── commonjs
+│   │   │       └── esm
+│   │   ├── js-yaml
+│   │   │   ├── bin
+│   │   │   ├── dist
+│   │   │   └── lib
+│   │   │       ├── schema
+│   │   │       └── type
+│   │   ├── jsonfile
+│   │   ├── kuler
+│   │   ├── lilconfig
+│   │   │   └── src
+│   │   ├── lodash.escape
+│   │   ├── lodash.memoize
+│   │   ├── lodash.merge
+│   │   ├── lodash.uniq
+│   │   ├── logform
+│   │   │   └── dist
+│   │   ├── lru-cache
+│   │   │   └── dist
+│   │   │       ├── commonjs
+│   │   │       └── esm
+│   │   ├── mdn-data
+│   │   │   ├── api
+│   │   │   ├── css
+│   │   │   └── l10n
+│   │   ├── merge2
+│   │   ├── micromatch
+│   │   ├── minimatch
+│   │   │   └── dist
+│   │   │       ├── commonjs
+│   │   │       └── esm
+│   │   ├── minipass
+│   │   │   └── dist
+│   │   │       ├── commonjs
+│   │   │       └── esm
+│   │   ├── ms
+│   │   ├── mustache
+│   │   │   ├── bin
+│   │   │   └── wrappers
+│   │   │       ├── dojo
+│   │   │       ├── jquery
+│   │   │       ├── mootools
+│   │   │       ├── qooxdoo
+│   │   │       └── yui3
+│   │   ├── nanoid
+│   │   │   ├── async
+│   │   │   ├── bin
+│   │   │   ├── non-secure
+│   │   │   └── url-alphabet
+│   │   ├── node-releases
+│   │   │   └── data
+│   │   │       ├── processed
+│   │   │       └── release-schedule
+│   │   ├── normalize-path
+│   │   ├── normalize-range
+│   │   ├── nth-check
+│   │   │   └── lib
+│   │   │       └── esm
+│   │   ├── once
+│   │   ├── one-time
+│   │   ├── package-json-from-dist
+│   │   │   └── dist
+│   │   │       ├── commonjs
+│   │   │       └── esm
+│   │   ├── path-is-absolute
+│   │   ├── path-key
+│   │   ├── path-parse
+│   │   ├── path-scurry
+│   │   │   └── dist
+│   │   │       ├── commonjs
+│   │   │       └── esm
+│   │   ├── path-type
+│   │   ├── picocolors
+│   │   ├── picomatch
+│   │   │   └── lib
+│   │   ├── pify
+│   │   ├── postcss
+│   │   │   └── lib
+│   │   ├── postcss-attribute-case-insensitive
+│   │   │   └── dist
+│   │   ├── postcss-calc
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-clamp
+│   │   ├── postcss-cli
+│   │   │   └── lib
+│   │   ├── postcss-color-functional-notation
+│   │   │   └── dist
+│   │   ├── postcss-color-hex-alpha
+│   │   │   └── dist
+│   │   ├── postcss-color-rebeccapurple
+│   │   │   └── dist
+│   │   ├── postcss-colormin
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-combine-media-query
+│   │   │   ├── examples
+│   │   │   │   └── gulp
+│   │   │   │       └── src
+│   │   │   ├── node_modules
+│   │   │   │   ├── picocolors
+│   │   │   │   └── postcss
+│   │   │   │       └── lib
+│   │   │   └── test
+│   │   ├── postcss-convert-values
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-custom-media
+│   │   │   └── dist
+│   │   ├── postcss-custom-properties
+│   │   │   └── dist
+│   │   ├── postcss-custom-selectors
+│   │   │   └── dist
+│   │   ├── postcss-dir-pseudo-class
+│   │   │   └── dist
+│   │   ├── postcss-discard-comments
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-discard-duplicates
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-discard-empty
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-discard-overridden
+│   │   │   └── src
+│   │   ├── postcss-double-position-gradients
+│   │   │   └── dist
+│   │   ├── postcss-focus-visible
+│   │   │   └── dist
+│   │   ├── postcss-focus-within
+│   │   │   └── dist
+│   │   ├── postcss-font-variant
+│   │   ├── postcss-gap-properties
+│   │   │   └── dist
+│   │   ├── postcss-image-set-function
+│   │   │   └── dist
+│   │   ├── postcss-import
+│   │   │   └── lib
+│   │   ├── postcss-lab-function
+│   │   │   └── dist
+│   │   ├── postcss-load-config
+│   │   │   └── src
+│   │   ├── postcss-logical
+│   │   │   └── dist
+│   │   ├── postcss-merge-longhand
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   │       └── decl
+│   │   │   └── types
+│   │   │       └── lib
+│   │   │           └── decl
+│   │   ├── postcss-merge-rules
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-minify-font-values
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-minify-gradients
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-minify-params
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-minify-selectors
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-nesting
+│   │   │   └── dist
+│   │   ├── postcss-normalize-charset
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-normalize-display-values
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-normalize-positions
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-normalize-repeat-style
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-normalize-string
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-normalize-timing-functions
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-normalize-unicode
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-normalize-url
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-normalize-whitespace
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-opacity-percentage
+│   │   ├── postcss-ordered-values
+│   │   │   ├── src
+│   │   │   │   ├── lib
+│   │   │   │   └── rules
+│   │   │   └── types
+│   │   │       ├── lib
+│   │   │       └── rules
+│   │   ├── postcss-overflow-shorthand
+│   │   │   └── dist
+│   │   ├── postcss-page-break
+│   │   ├── postcss-place
+│   │   │   └── dist
+│   │   ├── postcss-preset-env
+│   │   │   └── dist
+│   │   ├── postcss-pseudo-class-any-link
+│   │   │   └── dist
+│   │   ├── postcss-reduce-initial
+│   │   │   ├── src
+│   │   │   │   ├── data
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-reduce-transforms
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-replace-overflow-wrap
+│   │   ├── postcss-reporter
+│   │   │   └── lib
+│   │   ├── postcss-selector-not
+│   │   │   └── dist
+│   │   ├── postcss-selector-parser
+│   │   │   └── dist
+│   │   │       ├── selectors
+│   │   │       └── util
+│   │   ├── postcss-svgo
+│   │   │   ├── src
+│   │   │   │   └── lib
+│   │   │   └── types
+│   │   │       └── lib
+│   │   ├── postcss-unique-selectors
+│   │   │   ├── src
+│   │   │   └── types
+│   │   ├── postcss-value-parser
+│   │   │   └── lib
+│   │   ├── pretty-hrtime
+│   │   ├── prettysize
+│   │   │   └── tests
+│   │   ├── process-nextick-args
+│   │   ├── queue-microtask
+│   │   ├── read-cache
+│   │   ├── readable-stream
+│   │   │   ├── doc
+│   │   │   │   └── wg-meetings
+│   │   │   └── lib
+│   │   │       └── internal
+│   │   │           └── streams
+│   │   ├── readdirp
+│   │   ├── remove-trailing-separator
+│   │   ├── replace-ext
+│   │   ├── require-directory
+│   │   ├── resolve
+│   │   │   ├── bin
+│   │   │   ├── example
+│   │   │   ├── lib
+│   │   │   └── test
+│   │   │       ├── dotdot
+│   │   │       │   └── abc
+│   │   │       ├── module_dir
+│   │   │       │   ├── xmodules
+│   │   │       │   │   └── aaa
+│   │   │       │   ├── ymodules
+│   │   │       │   │   └── aaa
+│   │   │       │   └── zmodules
+│   │   │       │       └── bbb
+│   │   │       ├── node_path
+│   │   │       │   ├── x
+│   │   │       │   │   ├── aaa
+│   │   │       │   │   └── ccc
+│   │   │       │   └── y
+│   │   │       │       ├── bbb
+│   │   │       │       └── ccc
+│   │   │       ├── pathfilter
+│   │   │       │   └── deep_ref
+│   │   │       ├── precedence
+│   │   │       │   ├── aaa
+│   │   │       │   └── bbb
+│   │   │       ├── resolver
+│   │   │       │   ├── baz
+│   │   │       │   ├── browser_field
+│   │   │       │   ├── dot_main
+│   │   │       │   ├── dot_slash_main
+│   │   │       │   ├── false_main
+│   │   │       │   ├── incorrect_main
+│   │   │       │   ├── invalid_main
+│   │   │       │   ├── multirepo
+│   │   │       │   │   └── packages
+│   │   │       │   │       ├── package-a
+│   │   │       │   │       └── package-b
+│   │   │       │   ├── nested_symlinks
+│   │   │       │   │   └── mylib
+│   │   │       │   ├── other_path
+│   │   │       │   │   └── lib
+│   │   │       │   ├── quux
+│   │   │       │   │   └── foo
+│   │   │       │   ├── same_names
+│   │   │       │   │   └── foo
+│   │   │       │   ├── symlinked
+│   │   │       │   │   ├── _
+│   │   │       │   │   │   ├── node_modules
+│   │   │       │   │   │   └── symlink_target
+│   │   │       │   │   └── package
+│   │   │       │   └── without_basedir
+│   │   │       └── shadowed_core
+│   │   │           └── node_modules
+│   │   │               └── util
+│   │   ├── reusify
+│   │   │   └── benchmarks
+│   │   ├── run-parallel
+│   │   ├── safe-buffer
+│   │   ├── safe-stable-stringify
+│   │   │   └── esm
+│   │   ├── shebang-command
+│   │   ├── shebang-regex
+│   │   ├── signal-exit
+│   │   │   └── dist
+│   │   │       ├── cjs
+│   │   │       └── mjs
+│   │   ├── simple-swizzle
+│   │   ├── slash
+│   │   ├── source-map
+│   │   │   ├── dist
+│   │   │   └── lib
+│   │   ├── source-map-js
+│   │   │   └── lib
+│   │   ├── stable
+│   │   ├── stack-trace
+│   │   │   └── lib
+│   │   ├── string-width
+│   │   ├── string-width-cjs
+│   │   │   └── node_modules
+│   │   │       ├── ansi-regex
+│   │   │       ├── emoji-regex
+│   │   │       │   └── es2015
+│   │   │       └── strip-ansi
+│   │   ├── string_decoder
+│   │   │   └── lib
+│   │   ├── strip-ansi
+│   │   ├── strip-ansi-cjs
+│   │   │   └── node_modules
+│   │   │       └── ansi-regex
+│   │   ├── stylehacks
+│   │   │   ├── src
+│   │   │   │   ├── dictionary
+│   │   │   │   └── plugins
+│   │   │   └── types
+│   │   │       ├── dictionary
+│   │   │       └── plugins
+│   │   ├── supports-preserve-symlinks-flag
+│   │   │   └── test
+│   │   ├── svg-sprite
+│   │   │   ├── bin
+│   │   │   ├── lib
+│   │   │   │   └── svg-sprite
+│   │   │   │       ├── errors
+│   │   │   │       ├── mode
+│   │   │   │       │   └── css
+│   │   │   │       ├── transform
+│   │   │   │       └── utils
+│   │   │   ├── node_modules
+│   │   │   │   ├── brace-expansion
+│   │   │   │   ├── css-select
+│   │   │   │   │   └── lib
+│   │   │   │   │       └── pseudo-selectors
+│   │   │   │   ├── dom-serializer
+│   │   │   │   │   └── lib
+│   │   │   │   │       └── esm
+│   │   │   │   ├── domhandler
+│   │   │   │   │   └── lib
+│   │   │   │   ├── domutils
+│   │   │   │   │   └── lib
+│   │   │   │   ├── entities
+│   │   │   │   │   └── lib
+│   │   │   │   │       └── maps
+│   │   │   │   ├── glob
+│   │   │   │   ├── minimatch
+│   │   │   │   └── svgo
+│   │   │   │       ├── bin
+│   │   │   │       ├── dist
+│   │   │   │       ├── lib
+│   │   │   │       │   └── svgo
+│   │   │   │       └── plugins
+│   │   │   └── tmpl
+│   │   │       ├── common
+│   │   │       ├── css
+│   │   │       ├── defs
+│   │   │       ├── stack
+│   │   │       ├── symbol
+│   │   │       └── view
+│   │   ├── svgo
+│   │   │   ├── bin
+│   │   │   ├── dist
+│   │   │   ├── lib
+│   │   │   │   └── svgo
+│   │   │   ├── node_modules
+│   │   │   │   ├── css-tree
+│   │   │   │   │   ├── cjs
+│   │   │   │   │   │   ├── convertor
+│   │   │   │   │   │   ├── definition-syntax
+│   │   │   │   │   │   ├── generator
+│   │   │   │   │   │   ├── lexer
+│   │   │   │   │   │   ├── parser
+│   │   │   │   │   │   ├── syntax
+│   │   │   │   │   │   │   ├── atrule
+│   │   │   │   │   │   │   ├── config
+│   │   │   │   │   │   │   ├── function
+│   │   │   │   │   │   │   ├── node
+│   │   │   │   │   │   │   │   └── common
+│   │   │   │   │   │   │   ├── pseudo
+│   │   │   │   │   │   │   └── scope
+│   │   │   │   │   │   ├── tokenizer
+│   │   │   │   │   │   ├── utils
+│   │   │   │   │   │   └── walker
+│   │   │   │   │   ├── data
+│   │   │   │   │   ├── dist
+│   │   │   │   │   └── lib
+│   │   │   │   │       ├── convertor
+│   │   │   │   │       ├── definition-syntax
+│   │   │   │   │       ├── generator
+│   │   │   │   │       ├── lexer
+│   │   │   │   │       ├── parser
+│   │   │   │   │       ├── syntax
+│   │   │   │   │       │   ├── atrule
+│   │   │   │   │       │   ├── config
+│   │   │   │   │       │   ├── function
+│   │   │   │   │       │   ├── node
+│   │   │   │   │       │   ├── pseudo
+│   │   │   │   │       │   └── scope
+│   │   │   │   │       ├── tokenizer
+│   │   │   │   │       ├── utils
+│   │   │   │   │       └── walker
+│   │   │   │   ├── csso
+│   │   │   │   │   ├── cjs
+│   │   │   │   │   │   ├── clean
+│   │   │   │   │   │   ├── replace
+│   │   │   │   │   │   │   ├── atrule
+│   │   │   │   │   │   │   └── property
+│   │   │   │   │   │   └── restructure
+│   │   │   │   │   │       └── prepare
+│   │   │   │   │   ├── dist
+│   │   │   │   │   ├── lib
+│   │   │   │   │   │   ├── clean
+│   │   │   │   │   │   ├── replace
+│   │   │   │   │   │   │   ├── atrule
+│   │   │   │   │   │   │   └── property
+│   │   │   │   │   │   └── restructure
+│   │   │   │   │   │       └── prepare
+│   │   │   │   │   └── node_modules
+│   │   │   │   │       ├── css-tree
+│   │   │   │   │       │   ├── cjs
+│   │   │   │   │       │   │   ├── convertor
+│   │   │   │   │       │   │   ├── definition-syntax
+│   │   │   │   │       │   │   ├── generator
+│   │   │   │   │       │   │   ├── lexer
+│   │   │   │   │       │   │   ├── parser
+│   │   │   │   │       │   │   ├── syntax
+│   │   │   │   │       │   │   │   ├── atrule
+│   │   │   │   │       │   │   │   ├── config
+│   │   │   │   │       │   │   │   ├── function
+│   │   │   │   │       │   │   │   ├── node
+│   │   │   │   │       │   │   │   ├── pseudo
+│   │   │   │   │       │   │   │   └── scope
+│   │   │   │   │       │   │   ├── tokenizer
+│   │   │   │   │       │   │   ├── utils
+│   │   │   │   │       │   │   └── walker
+│   │   │   │   │       │   ├── data
+│   │   │   │   │       │   ├── dist
+│   │   │   │   │       │   └── lib
+│   │   │   │   │       │       ├── convertor
+│   │   │   │   │       │       ├── definition-syntax
+│   │   │   │   │       │       ├── generator
+│   │   │   │   │       │       ├── lexer
+│   │   │   │   │       │       ├── parser
+│   │   │   │   │       │       ├── syntax
+│   │   │   │   │       │       │   ├── atrule
+│   │   │   │   │       │       │   ├── config
+│   │   │   │   │       │       │   ├── function
+│   │   │   │   │       │       │   ├── node
+│   │   │   │   │       │       │   ├── pseudo
+│   │   │   │   │       │       │   └── scope
+│   │   │   │   │       │       ├── tokenizer
+│   │   │   │   │       │       ├── utils
+│   │   │   │   │       │       └── walker
+│   │   │   │   │       └── mdn-data
+│   │   │   │   │           ├── api
+│   │   │   │   │           ├── css
+│   │   │   │   │           └── l10n
+│   │   │   │   └── mdn-data
+│   │   │   │       ├── api
+│   │   │   │       ├── css
+│   │   │   │       └── l10n
+│   │   │   └── plugins
+│   │   ├── text-hex
+│   │   ├── thenby
+│   │   ├── to-regex-range
+│   │   ├── triple-beam
+│   │   │   └── config
+│   │   ├── universalify
+│   │   ├── update-browserslist-db
+│   │   ├── util-deprecate
+│   │   ├── vinyl
+│   │   │   └── lib
+│   │   ├── which
+│   │   │   └── bin
+│   │   ├── winston
+│   │   │   ├── dist
+│   │   │   │   └── winston
+│   │   │   │       ├── config
+│   │   │   │       └── transports
+│   │   │   ├── lib
+│   │   │   │   └── winston
+│   │   │   │       ├── config
+│   │   │   │       └── transports
+│   │   │   └── node_modules
+│   │   │       └── readable-stream
+│   │   │           └── lib
+│   │   │               └── internal
+│   │   │                   └── streams
+│   │   ├── winston-transport
+│   │   │   ├── dist
+│   │   │   └── node_modules
+│   │   │       └── readable-stream
+│   │   │           └── lib
+│   │   │               └── internal
+│   │   │                   └── streams
+│   │   ├── wrap-ansi
+│   │   ├── wrap-ansi-cjs
+│   │   │   └── node_modules
+│   │   │       ├── ansi-regex
+│   │   │       ├── ansi-styles
+│   │   │       ├── color-convert
+│   │   │       ├── color-name
+│   │   │       ├── emoji-regex
+│   │   │       │   └── es2015
+│   │   │       ├── string-width
+│   │   │       └── strip-ansi
+│   │   ├── wrappy
+│   │   ├── xpath
+│   │   ├── y18n
+│   │   │   └── build
+│   │   │       └── lib
+│   │   │           └── platform-shims
+│   │   ├── yaml
+│   │   │   ├── browser
+│   │   │   │   └── dist
+│   │   │   │       ├── compose
+│   │   │   │       ├── doc
+│   │   │   │       ├── nodes
+│   │   │   │       ├── parse
+│   │   │   │       ├── schema
+│   │   │   │       │   ├── common
+│   │   │   │       │   ├── core
+│   │   │   │       │   ├── json
+│   │   │   │       │   └── yaml-1.1
+│   │   │   │       └── stringify
+│   │   │   └── dist
+│   │   │       ├── compose
+│   │   │       ├── doc
+│   │   │       ├── nodes
+│   │   │       ├── parse
+│   │   │       ├── schema
+│   │   │       │   ├── common
+│   │   │       │   ├── core
+│   │   │       │   ├── json
+│   │   │       │   └── yaml-1.1
+│   │   │       └── stringify
+│   │   ├── yargs
+│   │   │   ├── build
+│   │   │   │   └── lib
+│   │   │   │       ├── typings
+│   │   │   │       └── utils
+│   │   │   ├── helpers
+│   │   │   ├── lib
+│   │   │   │   └── platform-shims
+│   │   │   ├── locales
+│   │   │   └── node_modules
+│   │   │       ├── ansi-regex
+│   │   │       ├── emoji-regex
+│   │   │       │   └── es2015
+│   │   │       ├── string-width
+│   │   │       └── strip-ansi
+│   │   └── yargs-parser
+│   │       └── build
+│   │           └── lib
+│   ├── scripts
+│   └── src
+│       ├── assets
+│       │   ├── img
+│       │   │   ├── background-patterns
+│       │   │   │   └── custom-patterns
+│       │   │   ├── icons
+│       │   │   └── template-previews
+│       │   │       └── default
+│       │   └── sprites
+│       ├── js
+│       │   ├── pdf
+│       │   └── utils
+│       └── styles
+└── scripts back-end
+    └── src
+        ├── assets
+        │   ├── img
+        │   │   └── icons
+        │   └── sprites
+        └── js
+            ├── pdf
+            └── utils
+
+1001 directories
