@@ -1,28 +1,71 @@
 {
   "name": "pdf-generator",
   "version": "1.0.0",
-  "description": "PDF Generator Project",
-  "main": "src/js/main.js",
+  "description": "Générateur de conventions PDF professionnel",
+  "main": "index.js",
   "scripts": {
-    "generate-sprites": "node scripts/generate-sprites.js",
-    "css:build": "postcss src/styles/*.css --dir dist/css --ext .min.css --map",
-    "css:watch": "postcss src/styles/*.css --dir dist/css --ext .min.css --watch",
-    "dev": "live-server",
-    "start": "npm-run-all --parallel dev css:watch"
+    "dev": "concurrently \"npm run dev:front\" \"npm run dev:back\"",
+    "dev:front": "cd pdf-generator && live-server src --port=3000",
+    "dev:back": "cd scripts\\ back-end && nodemon src/server.js",
+    "build": "postcss src/styles/main.css -o dist/css/main.css",
+    "build:svg": "svg-sprite --config config/svg-sprite.json src/assets/sprites/*.svg",
+    "watch": "postcss src/styles/main.css -o dist/css/main.css --watch",
+    "start": "node scripts\\ back-end/src/server.js"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "html-pdf": "^3.0.1",
+    "morgan": "^1.10.0",
+    "svg-sprite": "^2.0.2",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
-    "svg-sprite": "^2.0.2",
-    "svgo": "^3.0.2",
-    "glob": "^10.3.10",
-    "postcss": "^8.4.31",
-    "postcss-cli": "^10.1.0",
-    "cssnano": "^6.0.1",
     "autoprefixer": "^10.4.16",
-    "postcss-import": "^15.1.0",
-    "postcss-preset-env": "^9.3.0",
-    "postcss-combine-media-query": "^1.0.1",
-    "postcss-custom-properties": "^13.3.2",
+    "concurrently": "^8.2.2",
+    "cssnano": "^6.0.2",
     "live-server": "^1.2.2",
-    "npm-run-all": "^4.1.5"
-  }
+    "nodemon": "^3.0.2",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "postcss-combine-media-query": "^1.0.1",
+    "postcss-import": "^15.1.0",
+    "postcss-preset-env": "^9.3.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ],
+  "nodemonConfig": {
+    "ignore": [
+      "node_modules/*",
+      "dist/*",
+      "src/assets/*"
+    ],
+    "ext": "js,json,html,css"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/votre-username/pdf-generator.git"
+  },
+  "keywords": [
+    "pdf",
+    "generator",
+    "conventions",
+    "documents",
+    "professional"
+  ],
+  "author": "Votre Nom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/votre-username/pdf-generator/issues"
+  },
+  "homepage": "https://github.com/votre-username/pdf-generator#readme"
 }

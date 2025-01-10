@@ -1,0 +1,136 @@
+/* Styles des boutons adaptés à l'interface ConventionPro */
+.btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Boutons d'action principaux (Sauvegarder, Exporter) */
+.btn.primary {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.btn.primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+/* Boutons d'action secondaires (Annuler, Parcourir) */
+.btn.secondary {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: 1px solid var(--light-gray);
+}
+
+.btn.secondary:hover {
+    background-color: var(--light-gray);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+}
+
+/* Bouton Sélectionner pour les types de convention */
+.btn.select {
+    width: 100%;
+    justify-content: center;
+    background-color: var(--white);
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.btn.select:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+/* Boutons d'export (PDF, Word) */
+.btn.export {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: 1px solid var(--light-gray);
+    padding: 0.6rem 1.2rem;
+}
+
+.btn.export:hover {
+    background-color: var(--light-gray);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Bouton d'importation */
+.btn.import {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+    border: 2px dashed var(--dark-gray);
+    padding: 1.5rem;
+    width: 100%;
+    flex-direction: column;
+}
+
+.btn.import:hover {
+    background-color: #e3e7ea;
+    border-color: var(--accent-color);
+}
+
+/* Groupe de boutons d'action */
+.action-group {
+    display: flex;
+    gap: 1rem;
+}
+
+/* États des boutons */
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn.loading::after {
+    content: '';
+    width: 1em;
+    height: 1em;
+    margin-left: 0.5em;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    border-right-color: transparent;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .action-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .btn.export {
+        justify-content: center;
+    }
+}
