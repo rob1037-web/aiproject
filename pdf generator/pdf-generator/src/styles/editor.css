@@ -1,30 +1,29 @@
 /* editor.css */
 
-/* Editor Container */
-.content-area {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    background: #f8f9fa;
+/* Zone d'édition principale */
+.editor-container {
+    background: var(--white);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
+    margin-top: 2rem;
 }
 
-/* Editor Toolbar */
+/* Barre d'outils de l'éditeur */
 .editor-toolbar {
     display: flex;
-    gap: 10px;
-    padding: 10px;
-    background: #fff;
-    border-bottom: 1px solid #e0e0e0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--light-gray);
     border-radius: 8px 8px 0 0;
 }
 
 .toolbar-group {
     display: flex;
-    gap: 5px;
-    padding: 0 10px;
-    border-right: 1px solid #e0e0e0;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    border-right: 1px solid var(--light-gray);
 }
 
 .toolbar-group:last-child {
@@ -41,72 +40,71 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--primary-color);
     transition: all 0.2s ease;
 }
 
 .toolbar-btn:hover {
-    background: #f0f0f0;
+    background: var(--light-gray);
 }
 
 .toolbar-btn.active {
-    background: #e3e8ff;
-    color: #4a6fff;
+    background: var(--accent-color);
+    color: var(--white);
 }
 
-/* Preview Area */
+/* Zone de prévisualisation */
 .preview-area {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    background: #f0f2f5;
+    padding: 2rem;
+    background: var(--light-gray);
+    min-height: 400px;
 }
 
-.pdf-content {
+.preview-content {
     width: 21cm;
     min-height: 29.7cm;
     padding: 2cm;
     margin: 0 auto;
-    background: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: 8px;
 }
 
-/* Editable Content */
+/* Contenu éditable */
 .editable-content {
     outline: none;
     min-height: 200px;
-    padding: 10px;
+    padding: 1rem;
 }
 
 .editable-content:focus {
-    background: #fff;
-    box-shadow: inset 0 0 0 2px #4a6fff1a;
+    background: var(--white);
+    box-shadow: inset 0 0 0 2px rgba(52, 152, 219, 0.1);
 }
 
-/* Template Header */
+/* En-tête du template */
 .template-header {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #eee;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--light-gray);
 }
 
-.template-header h2[contenteditable="true"],
-.template-header p[contenteditable="true"] {
+[contenteditable="true"] {
     outline: none;
-    padding: 5px;
+    padding: 0.5rem;
     border-radius: 4px;
+    transition: background-color 0.2s ease;
 }
 
-.template-header h2[contenteditable="true"]:focus,
-.template-header p[contenteditable="true"]:focus {
-    background: #f8f9fa;
+[contenteditable="true"]:focus {
+    background: var(--light-gray);
 }
 
-/* Preview Controls */
+/* Contrôles de prévisualisation */
 .preview-controls {
-    padding: 10px;
-    background: #fff;
-    border-top: 1px solid #e0e0e0;
+    padding: 1rem;
+    background: var(--white);
+    border-top: 1px solid var(--light-gray);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -114,11 +112,11 @@
 
 .preview-options {
     display: flex;
-    gap: 15px;
+    gap: 1rem;
     align-items: center;
 }
 
-/* Toggle Switch */
+/* Interrupteur (toggle) */
 .toggle-switch {
     display: inline-flex;
     align-items: center;
@@ -133,9 +131,9 @@
     position: relative;
     width: 40px;
     height: 20px;
-    background: #ccc;
+    background: var(--dark-gray);
     border-radius: 20px;
-    margin-right: 8px;
+    margin-right: 0.5rem;
     transition: 0.4s;
 }
 
@@ -146,93 +144,70 @@
     width: 16px;
     left: 2px;
     bottom: 2px;
-    background: white;
+    background: var(--white);
     border-radius: 50%;
     transition: 0.4s;
 }
 
 input:checked + .slider {
-    background: #4a6fff;
+    background: var(--accent-color);
 }
 
 input:checked + .slider:before {
     transform: translateX(20px);
 }
 
-/* Preview Thumbnails */
+/* Miniatures de prévisualisation */
 .preview-thumbnails {
     display: flex;
-    gap: 10px;
-    padding: 10px;
+    gap: 1rem;
+    padding: 1rem;
     overflow-x: auto;
+    background: var(--white);
+    border-top: 1px solid var(--light-gray);
 }
 
 .page-thumbnail {
     width: 80px;
     height: 113px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--light-gray);
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .page-thumbnail:hover {
-    border-color: #4a6fff;
+    border-color: var(--accent-color);
     transform: translateY(-2px);
 }
 
 .page-thumbnail.active {
-    border: 2px solid #4a6fff;
-    box-shadow: 0 2px 8px rgba(74, 111, 255, 0.2);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .editor-toolbar {
-        flex-wrap: wrap;
-    }
-    
-    .toolbar-group {
-        border-right: none;
-        border-bottom: 1px solid #e0e0e0;
-        padding: 5px 0;
-    }
-
-    .pdf-content {
-        width: 100%;
-        padding: 1cm;
-    }
-
-    .preview-controls {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .preview-options {
-        flex-direction: column;
-        align-items: stretch;
-    }
-}
-
-/* Text Formatting */
+/* Styles de texte */
 .editable-content h1, 
 .editable-content h2, 
 .editable-content h3 {
+    color: var(--primary-color);
     margin: 1em 0 0.5em;
 }
 
 .editable-content p {
     margin-bottom: 1em;
     line-height: 1.6;
+    color: var(--primary-color);
 }
 
 .editable-content ul, 
 .editable-content ol {
     margin: 1em 0;
     padding-left: 2em;
+    color: var(--primary-color);
 }
 
-/* Table Styles */
+/* Styles de tableau */
 .editable-content table {
     width: 100%;
     border-collapse: collapse;
@@ -241,23 +216,57 @@ input:checked + .slider:before {
 
 .editable-content td,
 .editable-content th {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid var(--light-gray);
+    padding: 0.8rem;
     text-align: left;
 }
 
 .editable-content th {
-    background-color: #f8f9fa;
+    background-color: var(--light-gray);
+    color: var(--primary-color);
 }
 
-/* Image Handling */
+/* Gestion des images */
 .editable-content img {
     max-width: 100%;
     height: auto;
     margin: 1em 0;
+    border-radius: 4px;
 }
 
-/* Selection Styles */
+/* Styles de sélection */
 .editable-content ::selection {
-    background: #4a6fff33;
+    background: rgba(52, 152, 219, 0.2);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .editor-toolbar {
+        flex-direction: column;
+    }
+    
+    .toolbar-group {
+        border-right: none;
+        border-bottom: 1px solid var(--light-gray);
+        padding: 0.5rem 0;
+    }
+
+    .preview-content {
+        width: 100%;
+        padding: 1cm;
+    }
+
+    .preview-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .preview-options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .preview-thumbnails {
+        justify-content: center;
+    }
 }

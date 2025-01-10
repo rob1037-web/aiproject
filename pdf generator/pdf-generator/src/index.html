@@ -3,452 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Generator</title>
+    <title>Générateur de Conventions | Espace Pro</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/templates.css">
-    <link rel="stylesheet" href="styles/modal.css">
-    <link rel="stylesheet" href="styles/export.css">
     <link rel="stylesheet" href="styles/editor.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Open+Sans:ital,wght@0,400;0,500;0,700;1,400" rel="stylesheet">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/templates.css">
 </head>
 <body>
-    <div id="app">
-        <!-- Header -->
-        <header class="header">
-            <h1>Générateur de PDF</h1>
-            <nav class="main-nav">
-                <button id="saveTemplateBtn" class="btn secondary">
-                    <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#save"/></svg>
-                    Sauvegarder le modèle
-                </button>
-                <button id="loadTemplateBtn" class="btn secondary">
-                    <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#load"/></svg>
-                    Charger un modèle
-                </button>
-                <button id="historyBtn" class="btn secondary">
-                    <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#history"/></svg>
-                    Historique
-                </button>
-                <button id="settingsBtn" class="btn secondary">
-                    <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#settings"/></svg>
-                    Paramètres
-                </button>
-            </nav>
-        </header>
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="nav-left">
+                <a href="/" class="logo">ConventionPro</a>
+                <ul class="nav-menu">
+                    <li><a href="/generateur" class="active">Générateur</a></li>
+                    <li><a href="/conventions">Mes conventions</a></li>
+                    <li><a href="/templates">Templates</a></li>
+                    <li><a href="/statistiques">Statistiques</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="user-profile">
+                    <span class="user-name">John Doe</span>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-        <main class="main">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Template Selection -->
-                <div class="template-selector">
-                    <h3>Template</h3>
-                    <select id="templateSelect" class="select">
-                        <option value="default">Template par défaut</option>
-                        <option value="business">Template professionnel</option>
-                        <option value="creative">Template créatif</option>
-                        <option value="academic">Template académique</option>
+    <main class="main-content">
+        <div class="breadcrumb">
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/conventions">Conventions</a></li>
+                <li>Nouvelle convention</li>
+            </ul>
+        </div>
+
+        <div class="document-header">
+            <h1>Nouvelle Convention</h1>
+            <div class="document-ref">#REF-2025-001</div>
+        </div>
+
+        <div class="progress-tracker">
+            <div class="step active">
+                <span class="step-number">1</span>
+                <span class="step-label">Type de convention</span>
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <span class="step-label">Informations générales</span>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <span class="step-label">Programme</span>
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                <span class="step-label">Validation</span>
+            </div>
+        </div>
+
+        <div class="action-bar">
+            <div class="action-group">
+                <button type="button" class="btn primary" id="saveButton">Sauvegarder</button>
+                <button type="button" class="btn secondary" id="exportPdfButton">Exporter PDF</button>
+                <button type="button" class="btn secondary" id="exportWordButton">Exporter Word</button>
+            </div>
+        </div>
+
+        <section class="content-section">
+            <h2>Type de Convention</h2>
+            <p class="section-description">Sélectionnez le type de convention à générer</p>
+
+            <div class="convention-grid">
+                <div class="convention-card" data-type="generaliste">
+                    <h3>Convention Généraliste</h3>
+                    <p>Formation professionnelle standard</p>
+                    <button class="btn select-btn">Sélectionner</button>
+                </div>
+
+                <div class="convention-card" data-type="entretien">
+                    <h3>Entretien Professionnel</h3>
+                    <p>Bilan de compétences & évolution</p>
+                    <button class="btn select-btn">Sélectionner</button>
+                </div>
+
+                <div class="convention-card" data-type="vae">
+                    <h3>VAE</h3>
+                    <p>Validation des Acquis de l'Expérience</p>
+                    <button class="btn select-btn">Sélectionner</button>
+                </div>
+
+                <div class="convention-card" data-type="contrat-pro">
+                    <h3>Contrat Pro</h3>
+                    <p>Contrat de professionnalisation</p>
+                    <button class="btn select-btn">Sélectionner</button>
+                </div>
+            </div>
+
+            <div class="customization-section">
+                <div class="form-group">
+                    <label for="backgroundPattern">Motif de fond</label>
+                    <select id="backgroundPattern" class="form-select">
+                        <option value="none">Aucun</option>
+                        <option value="dots">Points</option>
+                        <option value="grid">Grille</option>
+                        <option value="lines">Lignes</option>
+                        <option value="waves">Vagues</option>
+                        <option value="geometric">Géométrique</option>
+                        <option value="abstract">Abstrait</option>
                     </select>
                 </div>
-
-                <!-- Theme Selection -->
-                <div class="theme-section">
-                    <h3>Thèmes</h3>
-                    <div class="theme-selector">
-                        <div class="theme-option" data-theme="light">
-                            <div class="theme-preview light"></div>
-                            <span>Clair</span>
-                        </div>
-                        <div class="theme-option" data-theme="dark">
-                            <div class="theme-preview dark"></div>
-                            <span>Sombre</span>
-                        </div>
-                        <div class="theme-option" data-theme="colored">
-                            <div class="theme-preview colored"></div>
-                            <span>Coloré</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Page Settings -->
-                <div class="page-settings">
-                    <h3>Paramètres de page</h3>
-                    <div class="form-group">
-                        <label for="pageBackground">Arrière-plan</label>
-                        <div class="background-options">
-                            <select id="backgroundType" class="select">
-                                <option value="color">Couleur</option>
-                                <option value="gradient">Dégradé</option>
-                                <option value="pattern">Motif</option>
-                            </select>
-                            <input type="color" id="backgroundColor" value="#ffffff">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="pageTransition">Transition</label>
-                        <select id="pageTransition" class="select">
-                            <option value="none">Aucune</option>
-                            <option value="fade">Fondu</option>
-                            <option value="slide">Glissement</option>
-                            <option value="flip">Retournement</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Customization Panel -->
-                <div class="customization-panel">
-                    <h3>Personnalisation</h3>
-                    <div class="form-group">
-                        <label for="headerColor">Couleur d'en-tête :</label>
-                        <input type="color" id="headerColor" value="#2196F3">
-                    </div>
-                    <div class="form-group">
-                        <label for="fontSize">Taille du texte :</label>
-                        <input type="range" id="fontSize" min="12" max="24" value="16">
-                        <span class="font-size-value">16px</span>
-                    </div>
-                    <div class="form-group">
-                        <label for="fontFamily">Police :</label>
-                        <select id="fontFamily" class="select">
-                            <option value="Arial">Arial</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Helvetica">Helvetica</option>
-                            <option value="Calibri">Calibri</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="lineHeight">Interligne :</label>
-                        <input type="range" id="lineHeight" min="1" max="2" step="0.1" value="1.5">
-                        <span class="line-height-value">1.5</span>
-                    </div>
-                </div>
-
-                <!-- Layout Options -->
-                <div class="layout-options">
-                    <h3>Mise en page</h3>
-                    <div class="form-group">
-                        <label for="columnLayout">Colonnes :</label>
-                        <select id="columnLayout" class="select">
-                            <option value="1">Une colonne</option>
-                            <option value="2">Deux colonnes</option>
-                            <option value="3">Trois colonnes</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="pageStyle">Style de page :</label>
-                        <select id="pageStyle" class="select">
-                            <option value="standard">Standard</option>
-                            <option value="magazine">Magazine</option>
-                            <option value="book">Livre</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Export Options -->
-                <div class="export-options">
-                    <h3>Options d'export</h3>
-                    <div class="option-group">
-                        <label>Format de page</label>
-                        <select id="pageFormat" class="select">
-                            <option value="a4">A4</option>
-                            <option value="a5">A5</option>
-                            <option value="letter">Letter</option>
-                            <option value="legal">Legal</option>
-                        </select>
-                    </div>
-                    <div class="option-group">
-                        <label>Orientation</label>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="orientation" value="portrait" checked>
-                                Portrait
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="orientation" value="landscape">
-                                Paysage
-                            </label>
-                        </div>
-                    </div>
-                    <div class="option-group">
-                        <label>Marges (mm)</label>
-                        <div class="margins-inputs">
-                            <input type="number" id="marginTop" placeholder="Haut" value="20" min="0">
-                            <input type="number" id="marginRight" placeholder="Droite" value="20" min="0">
-                            <input type="number" id="marginBottom" placeholder="Bas" value="20" min="0">
-                            <input type="number" id="marginLeft" placeholder="Gauche" value="20" min="0">
-                        </div>
-                    </div>
-                    <div class="option-group">
-                        <label>Qualité</label>
-                        <select id="exportQuality" class="select">
-                            <option value="high">Haute</option>
-                            <option value="medium" selected>Moyenne</option>
-                            <option value="low">Basse</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Metadata Section -->
-                <div class="metadata-section">
-                    <h3>Métadonnées</h3>
-                    <div class="form-group">
-                        <label for="docTitle">Titre</label>
-                        <input type="text" id="docTitle" class="input-field" placeholder="Titre du document">
-                    </div>
-                    <div class="form-group">
-                        <label for="docAuthor">Auteur</label>
-                        <input type="text" id="docAuthor" class="input-field" placeholder="Nom de l'auteur">
-                    </div>
-                    <div class="form-group">
-                        <label for="docKeywords">Mots-clés</label>
-                        <input type="text" id="docKeywords" class="input-field" placeholder="Mots-clés séparés par des virgules">
-                    </div>
-                </div>
-
-                <!-- Generate Button -->
-                <div class="generate-section">
-                    <button id="generatePdf" class="btn primary">
-                        <svg class="icon">
-                            <use xlink:href="assets/sprites/sprite.svg#generate"/>
-                        </svg>
-                        Générer PDF
-                    </button>
-                </div>
+                <div class="preview-area"></div>
             </div>
-            <!-- Content Area -->
-            <div class="content-area">
-                <!-- Page Management -->
-                <div class="page-management">
-                    <div class="pages-toolbar">
-                        <button class="btn secondary" id="addPageBtn">
-                            <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#add-page"/></svg>
-                            Nouvelle page
-                        </button>
-                        <div class="page-navigation">
-                            <button class="btn icon-btn" id="prevPage">
-                                <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#previous"/></svg>
-                            </button>
-                            <span class="page-indicator">Page <span id="currentPage">1</span> / <span id="totalPages">1</span></span>
-                            <button class="btn icon-btn" id="nextPage">
-                                <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#next"/></svg>
-                            </button>
-                        </div>
-                        <button class="btn danger" id="deletePageBtn">
-                            <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#delete"/></svg>
-                            Supprimer la page
-                        </button>
-                    </div>
+        </section>
+    </main>
 
-                    <!-- Sections Manager -->
-                    <div class="sections-manager">
-                        <div class="sections-toolbar">
-                            <button class="btn secondary" id="addSectionBtn">
-                                <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#add-section"/></svg>
-                                Ajouter une section
-                            </button>
-                        </div>
-                        <div class="sections-list" id="sectionsList">
-                            <div class="section-item" draggable="true">
-                                <span class="section-handle">⋮⋮</span>
-                                <span class="section-title">En-tête</span>
-                                <div class="section-controls">
-                                    <button class="btn icon-btn" title="Éditer">
-                                        <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#edit"/></svg>
-                                    </button>
-                                    <button class="btn icon-btn" title="Supprimer">
-                                        <svg class="icon"><use xlink:href="assets/sprites/sprite.svg#delete"/></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <aside class="quick-actions">
+        <h3>Actions rapides</h3>
+        <ul>
+            <li><a href="/nouvelle-convention">Nouvelle convention</a></li>
+            <li><a href="/documents">Mes documents</a></li>
+            <li><a href="/parametres">Paramètres</a></li>
+        </ul>
+    </aside>
 
-                    <!-- Editor Toolbar -->
-                    <div class="editor-toolbar">
-                        <div class="toolbar-group text-style">
-                            <button class="toolbar-btn" data-command="bold" title="Gras">
-                                <i class="icon-bold"></i>
-                            </button>
-                            <button class="toolbar-btn" data-command="italic" title="Italique">
-                                <i class="icon-italic"></i>
-                            </button>
-                            <button class="toolbar-btn" data-command="underline" title="Souligné">
-                                <i class="icon-underline"></i>
-                            </button>
-                        </div>
-
-                        <div class="toolbar-group alignment">
-                            <button class="toolbar-btn" data-command="justifyLeft" title="Aligner à gauche">
-                                <i class="icon-align-left"></i>
-                            </button>
-                            <button class="toolbar-btn" data-command="justifyCenter" title="Centrer">
-                                <i class="icon-align-center"></i>
-                            </button>
-                            <button class="toolbar-btn" data-command="justifyRight" title="Aligner à droite">
-                                <i class="icon-align-right"></i>
-                            </button>
-                        </div>
-
-                        <div class="toolbar-group lists">
-                            <button class="toolbar-btn" data-command="insertUnorderedList" title="Liste à puces">
-                                <i class="icon-list-ul"></i>
-                            </button>
-                            <button class="toolbar-btn" data-command="insertOrderedList" title="Liste numérotée">
-                                <i class="icon-list-ol"></i>
-                            </button>
-                        </div>
-
-                        <div class="toolbar-group insert">
-                            <button class="toolbar-btn" data-command="insertImage" title="Insérer une image">
-                                <i class="icon-image"></i>
-                            </button>
-                            <button class="toolbar-btn" data-command="insertTable" title="Insérer un tableau">
-                                <i class="icon-table"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Preview Area -->
-                    <div class="preview-area">
-                        <div id="pdfPreview" class="pdf-content">
-                            <div class="template-header">
-                                <h2 contenteditable="true">Titre du document</h2>
-                                <p contenteditable="true">Sous-titre éditable</p>
-                            </div>
-                            <div class="template-body">
-                                <div contenteditable="true" class="editable-content">
-                                    <p>Cliquez pour éditer le contenu...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Preview Controls -->
-                    <div class="preview-controls">
-                        <div class="preview-options">
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="livePreviewToggle">
-                                <span class="slider"></span>
-                                <span class="label">Aperçu en temps réel</span>
-                            </label>
-                            <select id="previewZoom" class="select">
-                                <option value="0.5">50%</option>
-                                <option value="0.75">75%</option>
-                                <option value="1" selected>100%</option>
-                                <option value="1.25">125%</option>
-                                <option value="1.5">150%</option>
-                            </select>
-                        </div>
-                        <div class="preview-pages">
-                            <div class="preview-thumbnails" id="pageThumbnails">
-                                <!-- Les miniatures des pages seront générées ici -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="/aide">Centre d'aide</a></li>
+                    <li><a href="/documentation">Documentation</a></li>
+                    <li><a href="/support">Contact support</a></li>
+                </ul>
             </div>
-        </main>
-        <!-- Modals -->
-        <!-- Save Modal -->
-        <div id="saveModal" class="modal">
-            <div class="modal-content">
-                <h2>Sauvegarder le modèle</h2>
-                <form id="saveTemplateForm">
-                    <div class="form-group">
-                        <label for="templateName">Nom du modèle</label>
-                        <input type="text" id="templateName" class="input-field" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="templateDescription">Description</label>
-                        <textarea id="templateDescription" class="textarea-field"></textarea>
-                    </div>
-                    <div class="modal-actions">
-                        <button type="button" class="btn secondary modal-close">Annuler</button>
-                        <button type="submit" class="btn primary">Sauvegarder</button>
-                    </div>
-                </form>
+            <div class="footer-section">
+                <h4>Informations légales</h4>
+                <ul>
+                    <li><a href="/mentions-legales">Mentions légales</a></li>
+                    <li><a href="/confidentialite">Politique de confidentialité</a></li>
+                    <li><a href="/cgu">CGU</a></li>
+                </ul>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p>© 2025 ConventionPro - Tous droits réservés</p>
+        </div>
+    </footer>
 
-        <!-- Load Modal -->
-        <div id="loadModal" class="modal">
-            <div class="modal-content">
-                <h2>Charger un modèle</h2>
-                <div class="templates-list" id="savedTemplatesList">
-                    <!-- Templates will be injected here -->
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn secondary modal-close">Fermer</button>
+    <div class="modal" id="importModal" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Importer une convention</h3>
+                <button class="modal-close" aria-label="Fermer">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="drop-zone" id="dropZone">
+                    <p>Glissez-déposez vos fichiers ici</p>
+                    <p>ou</p>
+                    <button class="btn browse-btn">Parcourir</button>
+                    <input type="file" hidden id="fileInput">
                 </div>
             </div>
-        </div>
-
-        <!-- Section Modal -->
-        <div id="sectionModal" class="modal">
-            <div class="modal-content">
-                <h2>Configurer la section</h2>
-                <form id="sectionForm">
-                    <div class="form-group">
-                        <label for="sectionTitle">Titre de la section</label>
-                        <input type="text" id="sectionTitle" class="input-field" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sectionType">Type de section</label>
-                        <select id="sectionType" class="select">
-                            <option value="text">Texte</option>
-                            <option value="image">Image</option>
-                            <option value="table">Tableau</option>
-                            <option value="chart">Graphique</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sectionStyle">Style</label>
-                        <select id="sectionStyle" class="select">
-                            <option value="normal">Normal</option>
-                            <option value="highlight">Mise en évidence</option>
-                            <option value="boxed">Encadré</option>
-                            <option value="sidebar">Colonne latérale</option>
-                        </select>
-                    </div>
-                    <div class="modal-actions">
-                        <button type="button" class="btn secondary modal-close">Annuler</button>
-                        <button type="submit" class="btn primary">Ajouter</button>
-                    </div>
-                </form>
+            <div class="modal-footer">
+                <button class="btn secondary" data-action="cancel">Annuler</button>
+                <button class="btn primary" data-action="import">Importer</button>
             </div>
-        </div>
-
-        <!-- Recovery Modal -->
-        <div id="recoveryModal" class="modal">
-            <div class="modal-content">
-                <h2>Récupération de document</h2>
-                <div class="recovery-list">
-                    <div class="recovery-header">
-                        <span>Version</span>
-                        <span>Date</span>
-                        <span>Actions</span>
-                    </div>
-                    <div class="recovery-items" id="recoveryItems">
-                        <!-- Les versions sauvegardées seront listées ici -->
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn secondary modal-close">Fermer</button>
-                    <button type="button" class="btn danger" id="clearAutosave">Effacer l'historique</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Toast Notifications -->
-        <div id="toastNotification" class="toast-notification"></div>
-
-        <!-- Autosave Indicator -->
-        <div class="autosave-indicator">
-            <span class="status">Sauvegarde automatique</span>
-            <span class="time">Dernière sauvegarde : 14:30</span>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/main.js" type="module"></script>
+    <script src="scripts/editor.js"></script>
+    <script src="scripts/save.js"></script>
+    <script src="scripts/modal.js"></script>
 </body>
 </html>
