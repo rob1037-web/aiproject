@@ -34,7 +34,44 @@
 
         <div class="document-header">
             <h1>Nouvelle Convention</h1>
-            <div class="document-ref">#REF-2025-001</div>
+            <div class="document-ref">
+                <script>
+                    // Fonction pour générer un numéro de référencement unique
+function generateReferenceNumber() {
+    const date = new Date();
+
+    // Extraire la date et l'heure pour rendre le numéro unique
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    // Créer un identifiant unique avec un préfixe ou suffixe si nécessaire
+    const uniqueId = `${year}${month}${day}-${hours}${minutes}${seconds}`;
+    return uniqueId;
+}
+
+// Fonction pour insérer le numéro de référence dans la div correspondante
+function setDocumentReference() {
+    const referenceDiv = document.querySelector('.document-header .document-ref');
+
+    if (referenceDiv) {
+        const referenceNumber = generateReferenceNumber();
+        referenceDiv.textContent = `Réf : ${referenceNumber}`;
+    } else {
+        console.error("La div avec la classe 'document-ref' n'a pas été trouvée.");
+    }
+}
+
+// Appeler la fonction après le chargement de la page
+window.addEventListener('DOMContentLoaded', () => {
+    setDocumentReference();
+});
+
+                </script>
+            </div>
         </div>
 
         <div class="progress-tracker">
@@ -167,5 +204,6 @@
     <script src="scripts/editor.js"></script>
     <script src="scripts/save.js"></script>
     <script src="scripts/modal.js"></script>
+
 </body>
 </html>
